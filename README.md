@@ -128,9 +128,33 @@ Show documentation for [setuptools](https://setuptools.readthedocs.io/en/latest/
 1. Create a virtual environment, install package, delete virtual environment
 1. Add dependencies to module
 1. Show GitHub and `pip install` from GitHub.
+1. Install `black` and run on your module.  Why can it be good to use `black` in a project?
 
 
 # Callable objects, lambdas, and extended argument syntax
+
+Create a class `X`, instantiate an object `x` and try `x()`.
+
+Implement `__call__` on `X`.
+
+Show `lambda x: x**2`, e.g. `sorted([random.randint(-5, 5) for _ in range(10)], key=lambda x: x**2)`
+
+Explain wtf this is: `def f(x, /, y, *, z): pass` (keyword-only arguments, no-pos-only)
+
+Explain `*args, **kwargs` as params.  Show `zip(*[[1,2,3], 'abc', [3,4,5]])`
+
+Show EBNF: https://docs.python.org/3.9/reference/compound_stmts.html#function-definitions
+
+## Exercises
+
+1. Create a function that takes a list (mutable obj) as default argument.
+1. Create a class whose instances are callable.
+1. Experiment with `filter`, `map`, `reduce` on `lambda`s.
+1. Create functions that take keyword-only arguments.
+1. Use `zip` with `*list`.  Explain what happens.
+1. Write a decorator that takes arbitrary arguments and keyword arguments.
+
+
 # Properties, class methods, and static methods
 # String representations of objects
 # Specialized numeric and scalar types
