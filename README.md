@@ -12,11 +12,63 @@ Go through the decorator concept.
 1. Create a decorator that takes a function as an argument, calls the function before and after the execution of the original function
 1. Create a decorator that takes a function f and returns f(val) where val is the output of the original function
 1. Create a class that acts like a decorator (see also callable objects)
-
+1. Use the `decorator` functool.
 
 
 # Closures
+
+Explain nested functions and their scope
+
+See the scope of non-local variables
+
+Overwrite the variable in the inner function and see what happens with the variable in the outer function:
+
+```python
+def fun():
+    a = 1
+    def infun():
+        a = 2
+        print(a)
+    infun()
+    print(a)
+fun()
+```
+
+(prints `2` and `1`, obviously)
+
+Now,
+```python
+def fun():
+    a = 1
+    def infun():
+        nonlocal a
+        a = 2
+        print(a)
+    infun()
+    print(a)
+fun()
+```
+
+
+
+## Exercises
+
+1. Create a function that defines an inner function and returns that function
+1. Create a function that defines a variable and an inner function and the inner function refers to the variable; return that function
+1. Experiment with the keywords `global` and `nonlocal`.
+1. Define two variables `a` and `b`, change their value from inside a function.  What happens with `a` and `b`? Try with `global a` later.
+
+
 # Creating context managers
+
+Show use of `with open`.
+
+## Exercise
+
+
+
+
+
 # Packaging and distribution of Python packages
 # Callable objects, lambdas, and extended argument syntax
 # Properties, class methods, and static methods
