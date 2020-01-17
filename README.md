@@ -63,10 +63,48 @@ fun()
 
 Show use of `with open`.
 
+What is actually `finally`?
+
+Open file, in the end of function scope close the file.
+
+Open database connection, in the end of function scope close the database connection.
+
+Show a manual context manager.
+
+Show using `@contextlib.contextmanager`.  (show with 0,1,2 `yield` statements)
+
+```python
+import contextlib
+
+@contextlib.contextmanager
+def mgr():
+    print('hello')
+    try:
+        yield  # yield something
+    finally:
+        print('goodbye')
+
+
+def myfun():
+    print('pre')
+    with mgr():
+        x = 1
+        print(x)
+        int('ca')
+        x = 2
+        print(x)
+    print('post')
+
+
+myfun()
+```
+
+
 ## Exercise
 
-
-
+1. Create a context manager using the `contextmanager` decorator
+2. Print before and after yield, observe
+3. Raise an exception and observe the post-print is present
 
 
 # Packaging and distribution of Python packages
