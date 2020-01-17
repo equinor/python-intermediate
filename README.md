@@ -171,9 +171,29 @@ Explain `__eq__` and `return NotImplemented`
 
 1. Create a Position class with `dist`, `norm`, `__add__`, with `@property`
 1. Add `repr`, `str` and `hash`, `eq`
+1. Implement the same class with `@dataclass` decorator
 
 
 # String representations of objects
+
+Explain the difference between `repr` and `str`.
+
+Explain benefits of implementing a good `repr`.
+
+
+## Exercises
+
+1. Print a Pandas dataframe and a Numpy matrix.
+1. Print a function.
+1. Print a class (the class, not an object).
+1. Create a class and define the `repr` and `str` methods.  What are the differences?
+1. Use `str(·)` on the object and observe.
+1. Use `repr(·)` on the object and observe.  Conclude.
+1. Return non-string in `str`.
+1. Print a class.  Which method is being called?
+1. Create a class with only one of the two methods, see what happens.
+
+
 # Specialized numeric and scalar types
 # Functional-style programming tools
 # The iteration and iterable protocols
