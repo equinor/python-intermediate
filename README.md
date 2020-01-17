@@ -139,7 +139,7 @@ Implement `__call__` on `X`.
 
 Show `lambda x: x**2`, e.g. `sorted([random.randint(-5, 5) for _ in range(10)], key=lambda x: x**2)`
 
-Explain wtf this is: `def f(x, /, y, *, z): pass` (keyword-only arguments, no-pos-only)
+Explain wtf this is: `def f(a, /, b, *, c): pass` (keyword-only arguments, no-pos-only) [`f(1, b=2, c=3)`]
 
 Explain `*args, **kwargs` as params.  Show `zip(*[[1,2,3], 'abc', [3,4,5]])`
 
@@ -156,6 +156,23 @@ Show EBNF: https://docs.python.org/3.9/reference/compound_stmts.html#function-de
 
 
 # Properties, class methods, and static methods
+
+Define a class `Pos` with "private" members `_x` and `_y`.  Explain the
+concept of "visibility" and namespaces.
+
+Add _getters_ and _setters_.
+
+Use `@property` decorator.
+
+Explain `__eq__` and `return NotImplemented`
+
+
+## Exercises
+
+1. Create a Position class with `dist`, `norm`, `__add__`, with `@property`
+1. Add `repr`, `str` and `hash`, `eq`
+
+
 # String representations of objects
 # Specialized numeric and scalar types
 # Functional-style programming tools
