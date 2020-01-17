@@ -119,6 +119,8 @@ Run `python setup.py build test install`
 
 Show `python setup.py -e install`
 
+Show documentation for [setuptools](https://setuptools.readthedocs.io/en/latest/).
+
 ## Exercises
 
 1. Write a module
