@@ -108,6 +108,26 @@ myfun()
 
 
 # Packaging and distribution of Python packages
+
+Introduce _virtual environments_.
+
+Show a small package `xl` and its `setup.py`.
+
+Add tests.
+
+Run `python setup.py build test install`
+
+Show `python setup.py -e install`
+
+## Exercises
+
+1. Write a module
+1. Write a `setup.py` file
+1. Create a virtual environment, install package, delete virtual environment
+1. Add dependencies to module
+1. Show GitHub and `pip install` from GitHub.
+
+
 # Callable objects, lambdas, and extended argument syntax
 # Properties, class methods, and static methods
 # String representations of objects
