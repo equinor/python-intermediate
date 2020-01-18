@@ -331,6 +331,44 @@ Introduce `namedtuple`.
 
 
 # The iteration and iterable protocols
+
+Iterating is one of the most fundamental things we do in programming.  It means
+to consider one item at a time of a sequence of items.  The question then
+becomes "what is a _sequence_ of items"?
+
+We are certainly familiar with some types of _sequences_, like `range(4)`, or
+the list `[0, 1, 2, 3]`, or the tuple `(0, 1, 2, 3)`, and you might know that
+strings are sequences of one-character strings.
+
+These are things that we can do the following with:
+
+```python
+for element in sequence:
+    print(element)
+```
+
+But there are more sequences, like sets of the type `set` (which don't have a
+pre-determined order), dictionaries (whose sequence becomes a sequence of the
+keys in the dictionary).
+
+Whenever we use `for`, `map`, `filter`, `reduce`, list comprehensions, etc.,
+Python _iterates_ through an _iterable_.  The _iterable_ is any object that
+implements an `__iter__` function (or the `__getitem__`, but we will skip that
+for now).
+
+The `__iter__` function returns an _iterator_.  An _iterator_ is any type
+implementing `__next__`.  That function returns elements in order, halting the
+iteration by returning `StopIteration`.
+
+
+## Exercises
+
+1. Iterate over lists, sets, strings, tuples
+1. Iterate over dicts using raw iteration, over `dict.keys` and `dict.items`
+1. Iterate over `dict.items` and `zip` with tuple unpacking
+1. Create a class whose instances are iterable.
+
+
 # Multiple inheritance, method resolution order, and super()
 # Collection protocols and implementing collections
 # Advanced error handling with exceptions
