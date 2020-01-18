@@ -46,10 +46,10 @@ fib = timeit(fib)
 
 The main idea is that we implement `timeit` something like this:
 ```python
-def timeit(func):
+def timeit(fib):
     def new_fib(n):
         start = now()
-        result = func(n)
+        result = fib(n)
         stop = now()
         print(stop-start)
         return result
@@ -64,7 +64,7 @@ def timeit(func):
 1. Create a decorator that prints a string before the execution of the original function
 1. Create a decorator that takes a string and prints the string before and after the execution of the original function
 1. Create a decorator that takes a function as an argument, calls the function before and after the execution of the original function
-1. Create a decorator that takes a function f and returns f(val) where val is the output of the original function
+1. Create a decorator that takes a function `f` and returns `f(val)` where val is the output of the original function
 1. Create a class that acts like a decorator (see also callable objects)
 1. Use the `decorator` functool.
 1. Create a decorator `pushd` that changes `cwd` before and after function call.
