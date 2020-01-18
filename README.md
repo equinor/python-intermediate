@@ -293,6 +293,12 @@ Explain benefits of implementing a good `repr`.
 
 # Specialized numeric and scalar types
 
+```python
+>>> 1.2 - 1.0
+0.19999999999999996
+```
+
+
 We know the `bool`, `int`, `float` (and `None`?) types.
 
 There are also the `complex`, `decimal`, and `fraction`
@@ -301,6 +307,7 @@ There are also the `complex`, `decimal`, and `fraction`
 > an approximate representation.
 >
 > — What Every Computer Scientist Should Know About Floating-Point Arithmetic.
+
 
 * `complex(1,2)` creates the number _1 + 2i_ (denoted `(1+2j)`)
 * `c.conjugate()` gives the complex conjugate
