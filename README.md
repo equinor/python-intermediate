@@ -1,3 +1,13 @@
+# Warming up
+
+Log into Advent of Code
+
+## Exercises
+
+1. Read a file containing one int per line, make into a list of ints.
+1. Solve Day 1
+
+
 # Function and class decorators
 
 Go through the decorator concept.
