@@ -307,3 +307,57 @@ c = conn.cursor()
 1. import sqlite3
 1. create book database with one table, books, `author`, `year`, `title`, `publisher`, `genre`
 1. normalize the database to 1NF, 2NF, 3NF, ...
+
+
+
+
+
+# Python 3.7, 3.8, 3.9 and beyond
+
+It is important to be up to date on changes to the language and as quickly as
+possible move on to the newest released runtime.
+
+## Python 3.7
+* PEP 539, new C API for thread-local storage
+* PEP 545, Python documentation translations
+* New documentation translations: Japanese, French, and Korean.
+* PEP 552, Deterministic pyc files
+* PEP 553, Built-in breakpoint()
+* PEP 557, Data Classes
+* PEP 560, Core support for typing module and generic types
+* PEP 562, Customization of access to module attributes
+* PEP 563, Postponed evaluation of annotations
+* PEP 564, Time functions with nanosecond resolution
+* PEP 565, Improved DeprecationWarning handling
+* PEP 567, Context Variables
+* Avoiding the use of ASCII as a default text encoding (PEP 538, legacy C locale coercion and PEP 540, forced UTF-8 runtime mode)
+* The insertion-order preservation nature of dict objects is now an official part of the Python language spec.
+* Notable performance improvements in many areas.
+
+## Python 3.8
+
+* PEP 572, Assignment expressions
+* PEP 570, Positional-only arguments
+* PEP 587, Python Initialization Configuration (improved embedding)
+* PEP 590, Vectorcall: a fast calling protocol for CPython
+* PEP 578, Runtime audit hooks
+* PEP 574, Pickle protocol 5 with out-of-band data
+* Typing-related: PEP 591 (Final qualifier), PEP 586 (Literal types), and PEP 589 (TypedDict)
+* Parallel filesystem cache for compiled bytecode
+* Debug builds share ABI as release builds
+* f-strings support a handy = specifier for debugging
+* continue is now legal in finally: blocks
+* on Windows, the default asyncio event loop is now ProactorEventLoop
+* on macOS, the spawn start method is now used by default in multiprocessing
+* multiprocessing can now use shared memory segments to avoid pickling costs between processes
+* typed_ast is merged back to CPython
+* LOAD_GLOBAL is now 40% faster
+* pickle now uses Protocol 4 by default, improving performance
+
+## Python 3.9
+
+Lots of security improvements, documentation enhancements, optimizations, some deprecations...
+
+* `dict1 | dict2` or `dict1 + dict2` (under discussion)
+
+TBA
