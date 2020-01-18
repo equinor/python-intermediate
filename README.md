@@ -308,6 +308,27 @@ There are also the `complex`, `decimal`, and `fraction`
 
 
 # Functional-style programming tools
+
+* Query-command separation
+
+Why is query good?
+
+* Immutable types
+
+Why is immutability good?
+
+A dictionary can only hold immutable types.  Why?
+
+Introduce `namedtuple`.
+
+## Exercises
+
+1. Use `namedtuple` for a `Pos` type
+1. Implement the `Pos` class immutable
+
+
+
+
 # The iteration and iterable protocols
 # Multiple inheritance, method resolution order, and super()
 # Collection protocols and implementing collections
