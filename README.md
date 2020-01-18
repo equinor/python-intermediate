@@ -1,3 +1,13 @@
+# Python intermediate 2 days course
+
+We assume familiarity with all basic types of Python, including `set`, `dict`,
+`tuple`, some functional programming tools in Python such as `map`, `filter`,
+`zip`, object oriented programming, organization of Python modules as well as
+file management.
+
+[TOC]
+
+
 # Warming up
 
 Log into Advent of Code
