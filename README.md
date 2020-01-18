@@ -292,6 +292,23 @@ Explain benefits of implementing a good `repr`.
 
 
 # Specialized numeric and scalar types
+
+We know the `bool`, `int`, `float` (and `None`?) types.
+
+There are also the `complex`, `decimal`, and `fraction`
+
+> Squeezing infinitely many real numbers into a finite number of bits requires
+> an approximate representation.
+>
+> — What Every Computer Scientist Should Know About Floating-Point Arithmetic.
+
+* `complex(1,2)` creates the number _1 + 2i_ (denoted `(1+2j)`)
+* `c.conjugate()` gives the complex conjugate
+* `decimal.Decimal(1.1)` → `Decimal('1.100000000000000088817841970012523233890533447265625')`
+* `fractions.Fraction(42,12)` → `Fraction(7, 2)`
+
+
+
 # Functional-style programming tools
 # The iteration and iterable protocols
 # Multiple inheritance, method resolution order, and super()
