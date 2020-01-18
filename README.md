@@ -256,4 +256,54 @@ Explain benefits of implementing a good `repr`.
 # Multiple inheritance, method resolution order, and super()
 # Collection protocols and implementing collections
 # Advanced error handling with exceptions
-# Introspection
+
+# SQL and `sqlite`
+
+SQL, or Structured Query Language, is a language for reading from and writing to
+databases, which usually are collections of tables of data, and the data we are
+reading and writing are relational data, meaning that there exists relations
+within the database we are interested in.
+
+Python comes bundled with
+[`sqlite3`](https://docs.python.org/3/library/sqlite3.html),
+a wrapper around the public domain database `sqlite`.  This database is a
+_local_ database living exclusively in a file on your file system.
+
+
+```python
+import sqlite3
+conn = sqlite3.connect('example.db')
+```
+
+```python
+c = conn.cursor()
+
+# Create table
+c.execute('''CREATE TABLE stocks
+             (date text, trans text, symbol text, qty real, price real)''')
+
+# Insert a row of data
+c.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)")
+
+# Save (commit) the changes
+conn.commit()
+
+# We can also close the connection if we are done with it.
+# Just be sure any changes have been committed or they will be lost.
+conn.close()
+```
+
+The data you’ve saved is persistent and is available in subsequent sessions:
+
+```python
+import sqlite3
+conn = sqlite3.connect('example.db')
+c = conn.cursor()
+```
+
+
+## Exercises
+
+1. import sqlite3
+1. create book database with one table, books, `author`, `year`, `title`, `publisher`, `genre`
+1. normalize the database to 1NF, 2NF, 3NF, ...
