@@ -5,7 +5,38 @@ We assume familiarity with all basic types of Python, including `set`, `dict`,
 `zip`, object oriented programming, organization of Python modules as well as
 file management.
 
-[TOC]
+
+## Table of contents
+
+
+- [Warming up](#warming-up)
+  * [Exercises](#exercises)
+- [Function and class decorators](#function-and-class-decorators)
+  * [Exercises](#exercises-1)
+- [Closures](#closures)
+  * [Exercises](#exercises-2)
+- [Creating context managers](#creating-context-managers)
+  * [Exercise](#exercise)
+- [Packaging and distribution of Python packages](#packaging-and-distribution-of-python-packages)
+  * [Exercises](#exercises-3)
+- [Callable objects, lambdas, and extended argument syntax](#callable-objects--lambdas--and-extended-argument-syntax)
+  * [Exercises](#exercises-4)
+- [Properties, class methods, and static methods](#properties--class-methods--and-static-methods)
+  * [Exercises](#exercises-5)
+- [String representations of objects](#string-representations-of-objects)
+  * [Exercises](#exercises-6)
+- [Specialized numeric and scalar types](#specialized-numeric-and-scalar-types)
+- [Functional-style programming tools](#functional-style-programming-tools)
+- [The iteration and iterable protocols](#the-iteration-and-iterable-protocols)
+- [Multiple inheritance, method resolution order, and super()](#multiple-inheritance--method-resolution-order--and-super--)
+- [Collection protocols and implementing collections](#collection-protocols-and-implementing-collections)
+- [Advanced error handling with exceptions](#advanced-error-handling-with-exceptions)
+- [SQL and `sqlite`](#sql-and--sqlite-)
+  * [Exercises](#exercises-7)
+- [Python 3.7, 3.8, 3.9 and beyond](#python-37--38--39-and-beyond)
+  * [Python 3.7](#python-37)
+  * [Python 3.8](#python-38)
+  * [Python 3.9](#python-39)
 
 
 # Warming up
