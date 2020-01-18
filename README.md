@@ -23,7 +23,7 @@ Go through the decorator concept.
 1. Create a decorator that takes a function f and returns f(val) where val is the output of the original function
 1. Create a class that acts like a decorator (see also callable objects)
 1. Use the `decorator` functool.
-
+1. Create a decorator `pushd` that changes `cwd` before and after function call.
 
 # Closures
 
@@ -113,9 +113,11 @@ myfun()
 ## Exercise
 
 1. Create a context manager using the `contextmanager` decorator
-2. Print before and after yield, observe
-3. Raise an exception and observe the post-print is present
-
+1. Print before and after yield, observe
+1. Raise an exception and observe the post-print is present
+1. Implement the `pushd` decorator as a context manager.
+1. Is it possible to have the name `pushd` as both a decorator and a context manager?
+1. Implement `tmpdir` as a context manager.
 
 # Packaging and distribution of Python packages
 
