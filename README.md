@@ -24,6 +24,7 @@ file management.
 - [Collection protocols and implementing collections](#collection-protocols-and-implementing-collections)
 - [Advanced error handling with exceptions](#advanced-error-handling-with-exceptions)
 - [SQL and `sqlite`](#sql-and--sqlite-)
+- [Test driven development](#test-driven-development)
 - [Python 3.7, 3.8, 3.9 and beyond](#python-37--38--39-and-beyond)
   * [Python 3.7](#python-37)
   * [Python 3.8](#python-38)
@@ -387,6 +388,10 @@ c = conn.cursor()
 
 
 
+# Test driven development
+
+
+## Exercises
 
 
 # Python 3.7, 3.8, 3.9 and beyond
