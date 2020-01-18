@@ -10,7 +10,51 @@ Log into Advent of Code
 
 # Function and class decorators
 
-Go through the decorator concept.
+A _decorator_ is a "metafunction"; a way to alter the behavior of a function
+that you write.  A decorator can change the behavior completely, change the
+inputs, and the return value of the function.
+
+Consider the very simple decorator `timeit` which prints the time a function
+uses to return:
+
+```python
+@timeit
+def fib(n):
+    return 1 if n <= 2 else fib(n-1) + fib(n-2)
+```
+
+Calling `fib(35)` should result in the following in the terminal:
+```
+>>> fib(35)
+fib took 2.1 sec to complete on input 35
+9227465
+```
+
+First we observe that
+```python
+@timeit
+def fib(n):
+    pass
+```
+is syntactic sugar for
+
+```python
+def fib(n):
+    pass
+fib = timeit(fib)
+```
+
+The main idea is that we implement `timeit` something like this:
+```python
+def timeit(func):
+    def new_fib(n):
+        start = now()
+        result = func(n)
+        stop = now()
+        print(stop-start)
+        return result
+    return new_fib
+```
 
 
 ## Exercises
