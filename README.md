@@ -429,6 +429,43 @@ colleagues), so there's rarely a need to use it.
 
 
 # Collection protocols and implementing collections
+
+We already know what an _iterable_ and an _iterator_ is.  In general,
+programming has much to do with collections of things, and our treatment of
+these collections.  A _container_ is the most general type of collection, with
+only one "requirement", namely that we can ask whether an object `o` is
+_contained_ in the container `c`, or in Python: `o in c`.
+
+In Python, a _collection_ is a _sized iterable_.  To be _sized_ means that we
+can find out a container's size.  Why couldn't we find out any iterable's size
+programmatically?
+
+This question, `in`, can also be asked about _iterables_ and _iterators_.  Why?
+How can you implement this `in` for an object you can iterate over?
+
+To make Python be able to answer `in`-questions for your home-made classes, you simple need to implement the method  `__getitem__(self, o)`.
+
+There are many other _specializations_ we could imagine for a container and
+iterables.  Some examples:
+* We want to iterate backwards: implement `__reversed__`
+* We want to know a container's size: implement `__len__`
+* Until now, we haven't been able to actually modify a collection: implement `__[get|set|del]item__` and `insert`
+
+
+## Exercises
+
+1. Implement a function `my_in(iterable, object)` which checks if an object is contained in an iterable.
+1. Implement a class that implements the `__getitem__` method.
+1. Experiment with the above examples, with `len`, `reversed`, `in`, `iter`, `next`, etc.
+1. Implement a `multiset` collection.
+1. Implement a linked list.
+
+
+## References
+
+* [Abstract Base Classes for Containers](https://docs.python.org/3/library/collections.abc.html)
+
+
 # Advanced error handling with exceptions
 
 # SQL and `sqlite`
