@@ -105,6 +105,13 @@ def timeit(fib):
 1. Create a class that acts like a decorator (see also callable objects)
 1. Use the `decorator` functool.
 1. Create a decorator `pushd` that changes `cwd` before and after function call.
+1. Use the `singledispatch` functionality from `functools` to _overload_ several functions
+1. Think about how you would _implement_ `singledispatch` yourself.
+1. Use `functools.wraps` to define a decorator.
+
+## References
+
+* [functools](https://docs.python.org/3/library/functools.html)
 
 # Closures
 
