@@ -380,7 +380,54 @@ iteration by returning `StopIteration`.
 1. Create a class whose instances are iterable.
 
 
+
+
 # Multiple inheritance, method resolution order, and super()
+
+A class can inherit from an existing class.  In this instance we call the class
+that inherits the _subclass_ of the class it inherits from, the _superclass_.
+
+```python
+class A:
+    pass
+
+class B(A):
+    pass
+```
+
+But a class can inherit from several classes:
+
+```python
+class C(A, B):
+    pass
+```
+
+The inheritance order determines the _method resolution order_ of methods calls
+on objects.  See `C.__mro__`:
+
+>`(__main__.C, __main__.A, __main__.B, object)`)
+
+Multiple inheritance is too difficult (maybe not for you, but for your
+colleagues), so there's rarely a need to use it.
+
+
+## Exercises
+
+1. Make a class that inherits from two classes.  Test it with several MROs.
+1. Create shared variable names, and play with and without `super`
+
+
+
+
+## References
+
+* [Method resolution order](http://python-history.blogspot.com/2010/06/method-resolution-order.html) by Guido
+
+
+
+
+
+
 # Collection protocols and implementing collections
 # Advanced error handling with exceptions
 
