@@ -40,6 +40,10 @@ Log into Advent of Code
 1. Read a file containing one int per line, make into a list of ints.
 1. Solve Day 1
 
+## References
+
+* [Advent of Code 2019, Day 1](https://adventofcode.com/2019/day/1)
+
 
 # Function and class decorators
 
