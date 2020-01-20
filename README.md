@@ -468,6 +468,53 @@ iterables.  Some examples:
 
 # Advanced error handling with exceptions
 
+
+Any function or method can throw an exception if it likes.  An exception
+signals an _exceptional_ situation, a situation that the function does
+not know how to deal with.
+
+
+There is no way to completely avoid such situations: the users can give
+the program malformed input, the filesystem or a file on the computer
+can be corrupt, the network connection can go down.
+
+
+**A bit of warning**: Never _ever_ catch an exception you don't know how
+to deal with.  A program that crashes is nearly always better than a
+program that is wrong but doesn't inform you.  The best is of course to
+have a bugfree program, but that is often unattainable; the second best
+(since there will be bugs) is a program that crashes on errors,
+informing users and developers that something went wrong!
+
+The simplest way to trigger an exception in your terminal is to simply
+write `1/0`.  You are asking Python to divide a number by zero, which
+Python determines it cannot deal with gracefully, and throws a _division
+by zero_ error.
+
+Another easy way to trigger an exception is to run `[][0]`, asking for
+the first element of an empty list.  Again, Python doesn't know what to
+answer, so throws an `IndexError`.
+
+All exceptions in Python derive from `BaseException`.  For example,
+`ZeroDivisionError` in an `ArithmeticError` which in turn is an
+`Exception` (which is a `BaseException`).  The `IndexError` derives from
+`LookupError` which again is an `Exception`.  The _exception hierarchy_
+allows for very fine-grained error handling, you can for example catch
+any `LookupError` (`IndexError` or `KeyError` or maybe one you define
+yourself?), and avoid catching an `ArithmeticError` in case you don't
+know how to deal with such an error.
+
+## Exercises
+
+## References
+
+* [Errors and exceptions](https://docs.python.org/3/tutorial/errors.html)
+* [Built-in exceptions](https://docs.python.org/3/library/exceptions.html)
+
+
+
+
+
 # SQL and `sqlite`
 
 SQL, or Structured Query Language, is a language for reading from and writing to
