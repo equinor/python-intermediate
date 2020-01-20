@@ -587,6 +587,14 @@ through, and the `else` block is skipped, and `x` will remain undefined.
 
 ## Exercises
 
+1. Write a program that reads input from the user until the user types
+   an integer.  In case the user types a single `q`, the program should
+   quit.
+1. An `except` clause can have several handlers.  Write a program that
+   catches `IndexError` and `ValueError` and does different things
+   depending on which error was thrown.
+1. Define your own exception class and throw and catch it.
+
 ## References
 
 * [Errors and exceptions](https://docs.python.org/3/tutorial/errors.html)
