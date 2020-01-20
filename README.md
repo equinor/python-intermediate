@@ -678,8 +678,30 @@ is mandatory reading.
 
 # Test driven development
 
+In test driven development (TDD), we write the tests before writing the actual
+implementation.  This helps us create a better design, and to better think about
+the problem before starting writing code.
+
+In this session, we will simply solve a bunch of problems, writing as strong
+tests as possible before implementing, and seeing how that helps us become
+better programmers.
+
+In the real world, TDD is even more beneficial as the design is often
+non-trivial, and it can help us design our API.
 
 ## Exercises
+
+1. Implement `FizzBuzz` with a test-driven development style
+1. Implement `fromroman` that parses a string such as `'vii'` and returns a number, e.g. 7
+1. Implement a simple calculator that takes input such as `'2 + (3 * 4)'` and returns its value.  For simplicity, you may use polish notation
+1. Write a password strength function that approves or rejects a password if it has or does not have at least one upper and one lower case letter, a non-leading non-trailing digit and a non-leading non-trailing special character.
+
+## References
+
+1. [pytest](https://docs.pytest.org/en/latest/)
+1. [unittest](https://docs.python.org/3/library/unittest.html)
+1. [travis-ci](https://travis-ci.com/plans)
+1. [circleci](https://circleci.com/)
 
 
 # Python 3.7, 3.8, 3.9 and beyond
