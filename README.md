@@ -649,6 +649,14 @@ c = conn.cursor()
 ```
 
 
+_A short note about SQL_: Very often, it may be beneficial to simply go
+for an ORM like SQLAlchemy, Peewee, PonyORM, however, before introducing
+an ORM in your
+project,
+[_The Vietnam of Computer Science_](http://blogs.tedneward.com/post/the-vietnam-of-computer-science/)
+is mandatory reading.
+
+
 ## Exercises
 
 1. import sqlite3
