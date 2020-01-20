@@ -203,6 +203,7 @@ myfun()
 1. Create a context manager using the `contextmanager` decorator
 1. Print before and after yield, observe
 1. Raise an exception and observe the post-print is present
+1. Implement the `open` context manager as `my_open`.
 1. Implement the `pushd` decorator as a context manager.
 1. Is it possible to have the name `pushd` as both a decorator and a context manager?
 1. Implement `tmpdir` as a context manager.
