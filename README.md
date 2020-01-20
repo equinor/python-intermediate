@@ -33,12 +33,13 @@ file management.
 
 # Warming up
 
-Log into Advent of Code
+Log into Advent of Code, 2019!
 
 ## Exercises
 
 1. Read a file containing one int per line, make into a list of ints.
-1. Solve Day 1
+1. Solve Day 1, parts 1 and 2 of 2019, receiving a _gold star_.
+1. [optional] Solve the rest of Advent of Code 2019.
 
 ## References
 
