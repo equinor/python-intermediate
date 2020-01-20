@@ -505,6 +505,86 @@ any `LookupError` (`IndexError` or `KeyError` or maybe one you define
 yourself?), and avoid catching an `ArithmeticError` in case you don't
 know how to deal with such an error.
 
+```python
+def throwing():
+    raise ValueError('This message explains what went wrong')
+
+throwing()
+```
+
+The above will "crash" your Python instance.  We can "catch" the error,
+and either suppress it, or throw a different exception, or even re-throw
+the same exception:
+
+```python
+try:
+    throwing()
+except ValueError:
+    print('Caught an exception')
+    #raise  # <-- a single `raise` will re-throw the ValueError
+```
+
+To catch the specific error to get its message, we type
+`except ValueError as err`,
+where `err` is you variable name of choosing.
+
+```python
+try:
+    throwing()
+except ValueError as err:
+    print(err.message)
+```
+
+**Warning again**: The above is _very bad practice in general; never do
+that!!_
+
+`try...finally`: The `try` statement has three optional blocks,
+1. `except`,
+1. `else`, and
+1. `finally`.
+
+
+**Cleaning up:**  The `finally` block is a block that is always* run.
+
+```python
+try:
+    raise ValueError()
+finally:
+    print('Goodbye')
+```
+
+Since the `finally` block is always run, you should be very careful with
+_returning_ from the finally block.  Quiz: what is returned?
+```python
+def throwing():
+    try:
+        return True
+    finally:
+        return False
+```
+
+The only block we haven't considered up until this point is the `else`
+block.  The `else` is executed if and only if the `try` block does not
+throw an exception.
+
+```python
+def throwing(n):
+    value = float('inf')
+    try:
+        value = 1/n
+    except ZeroDivisionError:
+        print('Division by zero')
+    else:
+        print('Divided successfully')
+    finally:
+        print('Returning', value)
+    return value
+```
+
+Note that if you call `x = throwing('a')`, an exception will leak
+through, and the `else` block is skipped, and `x` will remain undefined.
+
+
 ## Exercises
 
 ## References
