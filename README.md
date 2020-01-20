@@ -667,7 +667,13 @@ is mandatory reading.
 
 1. [`sqlite`](https://www.sqlite.org/index.html)
 1. [`sqlite3`](https://docs.python.org/3/library/sqlite3.html) (DB-API in Python)
-
+1. ORMs
+   1. [SQLAlchemy](https://www.sqlalchemy.org/)
+   1. [peewee](https://peewee.readthedocs.io/en/latest/)
+   1. [PonyORM](https://ponyorm.org/)
+   1. [SQLObject](http://sqlobject.org/)
+   1. [O/R Mapping](http://www.agiledata.org/essays/mappingObjects.html)
+   1. [_The Vietnam of Computer Science_](http://blogs.tedneward.com/post/the-vietnam-of-computer-science/)
 
 # Test driven development
 
