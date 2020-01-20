@@ -583,6 +583,10 @@ c = conn.cursor()
 It is important to be up to date on changes to the language and as quickly as
 possible move on to the newest released runtime.
 
+Therefore it is crucial that everyone who programs Python compiles the
+newest version from time to time and test new functionality, and verify
+that your old systems still work.
+
 ## Python 3.7
 * PEP 539, new C API for thread-local storage
 * PEP 545, Python documentation translations
