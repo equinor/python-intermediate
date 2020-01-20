@@ -566,6 +566,10 @@ c = conn.cursor()
 1. create book database with one table, books, `author`, `year`, `title`, `publisher`, `genre`
 1. normalize the database to 1NF, 2NF, 3NF, ...
 
+## References
+
+1. [`sqlite`](https://www.sqlite.org/index.html)
+1. [`sqlite3`](https://docs.python.org/3/library/sqlite3.html) (DB-API in Python)
 
 
 # Test driven development
