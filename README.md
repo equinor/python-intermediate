@@ -209,6 +209,12 @@ myfun()
 1. Is it possible to have the name `pushd` as both a decorator and a context manager?
 1. Implement `tmpdir` as a context manager.
 
+## References
+
+1. [`functools.wraps`](https://docs.python.org/3/library/functools.html#functools.wraps)
+1. [`ContextDecorator`](https://docs.python.org/3/library/contextlib.html#contextlib.ContextDecorator)
+
+
 # Packaging and distribution of Python packages
 
 Introduce _virtual environments_.
@@ -340,7 +346,9 @@ Introduce `namedtuple`.
 1. Use `namedtuple` for a `Pos` type
 1. Implement the `Pos` class immutable
 
+## References
 
+1. [reduce](https://docs.python.org/3/library/functools.html#functools.reduce)
 
 
 # The iteration and iterable protocols
