@@ -156,7 +156,7 @@ fun()
 1. Create a function that defines a variable and an inner function and the inner function refers to the variable; return that function
 1. Experiment with the keywords `global` and `nonlocal`.
 1. Define two variables `a` and `b`, change their value from inside a function.  What happens with `a` and `b`? Try with `global a` later.
-
+1. Bind up a mutable variable.  Change it outside the function.  Observe the behavior.
 
 # Creating context managers
 
