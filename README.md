@@ -348,14 +348,146 @@ def timeit(fib):
 
 
 
-# Properties, class methods, and static methods
+# Object oriented programming members
 
-Define a class `Pos` with "private" members `_x` and `_y`.  Explain the
-concept of "visibility" and namespaces.
+When we create a class `Pos` with members `x` and `y`, we allow a user to update
+`x` and `y` at will.  In other words, it would be totally reasonable for a user
+of `Pos` to do the following:
 
-Add _getters_ and _setters_.
+```python
+location = Pos(0, 2)
+location.x = 1
+```
 
-Use `@property` decorator.
+But occasionally, we don't want people to touch our private parts, in which case
+we can call a member `_x` (or even `__x`).  This tells the user that if you
+modify the content of `_x` (or `__x`), we no longer guarantee that the object
+will work as expected.  This is called the _visibility_ of the member `x`.
+
+Now, in Java, one would add two _methods_ (per member) called `getMember` and
+`setMember` (in this case `get_x` and `set_x`), but in Python, we can actually
+add an object _that appears to be a member_, `x`, but whose altering triggers a
+function call.
+
+To make this a more concrete example, consider the class called `Square`, which
+has two properties, `width` and `height`.  Obviously, since this is a square,
+they should be the same.  So implementing it like this would be a bad idea:
+```python
+class Square:
+    def __init__(self, width, height):
+        if width != height:
+            raise ValueError('heigh and width must be the same')
+        self.width = width
+        self.height = height
+
+    def get_area(self):
+        return self.width * self.height
+```
+
+However, a user may do the following:
+```python
+s = Square(3,3)
+s.width = 4
+s.get_area()  # returns 12
+```
+
+Using private members with _getters_ and _setters_ looks like this, which is much better:
+
+```python
+class Square:
+    def __init__(self, width, height):
+        if width != height:
+            raise ValueError('heigh and width must be the same')
+        self._width = width
+        self._height = height
+
+    def set_width(self, width):
+        self._width = width
+        self._height = width
+
+    def set_height(self, height):
+        self._width = height
+        self._height = height
+
+    def get_height(self):
+        return self._height
+
+    def get_width(self):
+        return self._width
+
+    def get_area(self):
+        return self._width * self._height
+```
+
+Now, the user cannot make an _illegal square_, unless they access the private
+members.
+
+However, the getters and setters belong to the Java community, in Python we can
+do something that looks nicer.
+
+```python
+class Square:
+    def __init__(self, width, height):
+        if width != height:
+            raise ValueError('heigh and width must be the same')
+        self._width = width
+        self._height = height
+
+    @property
+    def width(self):
+        return self._width
+
+    @width.setter
+    def width(self, width):
+        self._width = width
+        self._height = width
+
+    @property
+    def height(self):
+        return self._height
+
+    @height.setter
+    def height(self, height):
+        self._height = height
+        self._width = height
+
+    @property
+    def area(self):
+        return self.width * self.height
+```
+
+Using the `@property` decorator allows a user to write
+
+```
+>>> s = Square(5,5)
+
+>>> s.area
+25
+
+>>> s.width
+5
+
+>>> s.height
+5
+
+>>> s.width = 100
+
+>>> s.area
+10000
+
+>>> s.height
+100
+```
+
+Note that using properties is a great way to make a public member variable
+private after users have started to (ab)use your (leaky) implementation!
+
+Other examples where you want to hide your privates are in classes where you
+want to keep some additional book-keeping.  For example if you implement a
+collection and you allow people to add elements, but you want to keep track of
+this.
+
+
 
 Explain `__eq__` and `return NotImplemented`
 
