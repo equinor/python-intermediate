@@ -52,6 +52,22 @@ Log into Advent of Code, 2019!
 
 # The iteration and iterable protocols
 
+> An object capable of returning its members one at a time. Examples of
+> iterables include all sequence types (such as `list`, `str`, and `tuple`) and
+> some non-sequence types like `dict`, `file` objects, and objects of any
+> classes you define with an `__iter__()` method or with a `__getitem__()`
+> method that implements Sequence semantics.
+>
+> Iterables can be used in a for loop and in many other places where a sequence
+> is needed (`zip()`, `map()`, …). When an iterable object is passed as an
+> argument to the built-in function `iter()`, it returns an iterator for the
+> object. This iterator is good for one pass over the set of values. When using
+> iterables, it is usually not necessary to call `iter()` or deal with iterator
+> objects yourself. The for statement does that automatically for you, creating
+> a temporary unnamed variable to hold the iterator for the duration of the
+> loop.
+
+
 Iterating is one of the most fundamental things we do in programming.  It means
 to consider one item at a time of a sequence of items.  The question then
 becomes "what is a _sequence_ of items"?
@@ -288,7 +304,6 @@ print(quadruple(100))  # prints 400
 
 
 
-
 ## Exercises
 
 1. Create a function that defines an inner function and returns that function
@@ -296,6 +311,14 @@ print(quadruple(100))  # prints 400
 1. Experiment with the keywords `global` and `nonlocal`.
 1. Define two variables `a` and `b`, change their value from inside a function.  What happens with `a` and `b`? Try with `global a` later.
 1. Bind up a mutable variable.  Change it outside the function.  Observe the behavior.
+
+## References
+
+1. [Python data model](https://docs.python.org/3/reference/datamodel.html?highlight=closure)
+
+
+
+
 
 # Creating context managers
 
