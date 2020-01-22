@@ -110,7 +110,45 @@ print(quadruple(100))  # prints 400
 
 # Creating context managers
 
-Show use of `with open`.
+The use case of context managers is any situation where you find yourself
+writing one line of code and thinking "now I need to remember to do
+[something]".  The most usual example is the following:
+
+```python
+fh = open('file.txt', 'r')  # now I must remember to close it
+value = int(fh.readlines()[0])
+```
+
+See how easy it is to forget to close `fh`?
+
+Indeed, we can try harder to remember to close it:
+
+```python
+fh = open('file.txt', 'r')
+value = int(fh.readlines()[0])
+fh.close()  # phew, I remembered
+```
+
+However, when the `int` raises a `ValueError`, the file isn't closed after all!
+
+How do we deal with this situation?  Well, we have to do the following:
+
+```python
+fh = open('file.txt', 'r')
+try:
+    value = int(fh.readlines()[0])
+finally:
+    fh.close()  # closes the file even if exception is thrown
+```
+
+The above scenario is handled with a _context manager_ which uses the `with`
+keyword:
+
+```python
+with open('file.txt', 'r') as fh:
+    value = int(fh.readlines()[0])
+```
+
 
 What is actually `finally`?
 
