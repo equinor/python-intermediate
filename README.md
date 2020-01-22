@@ -21,10 +21,10 @@ file management.
 1. [String representations of objects](#string-representations-of-objects)
 1. [Specialized numeric and scalar types](#specialized-numeric-and-scalar-types)
 1. [Functional-style programming tools](#functional-style-programming-tools)
-1. [Multiple inheritance, method resolution order, and super()](#multiple-inheritance--method-resolution-order--and-super--)
 1. [Collection protocols and implementing collections](#collection-protocols-and-implementing-collections)
 1. [SQL and `sqlite`](#sql-and--sqlite-)
 1. [Test driven development](#test-driven-development)
+1. [Multiple inheritance, method resolution order, and super()](#multiple-inheritance--method-resolution-order--and-super--)
 1. [Python 3.7, 3.8, 3.9 and beyond](#python-37--38--39-and-beyond)
    * [Python 3.7](#python-37)
    * [Python 3.8](#python-38)
@@ -830,46 +830,7 @@ Introduce `namedtuple`.
 
 
 
-# Multiple inheritance, method resolution order, and super()
 
-A class can inherit from an existing class.  In this instance we call the class
-that inherits the _subclass_ of the class it inherits from, the _superclass_.
-
-```python
-class A:
-    pass
-
-class B(A):
-    pass
-```
-
-But a class can inherit from several classes:
-
-```python
-class C(A, B):
-    pass
-```
-
-The inheritance order determines the _method resolution order_ of methods calls
-on objects.  See `C.__mro__`:
-
->`(__main__.C, __main__.A, __main__.B, object)`)
-
-Multiple inheritance is too difficult (maybe not for you, but for your
-colleagues), so there's rarely a need to use it.
-
-
-## Exercises
-
-1. Make a class that inherits from two classes.  Test it with several MROs.
-1. Create shared variable names, and play with and without `super`
-
-
-
-
-## References
-
-* [Method resolution order](http://python-history.blogspot.com/2010/06/method-resolution-order.html) by Guido
 
 
 
@@ -996,6 +957,10 @@ is mandatory reading.
    1. [O/R Mapping](http://www.agiledata.org/essays/mappingObjects.html)
    1. [_The Vietnam of Computer Science_](http://blogs.tedneward.com/post/the-vietnam-of-computer-science/)
 
+
+
+
+
 # Test driven development
 
 In test driven development (TDD), we write the tests before writing the actual
@@ -1022,6 +987,59 @@ non-trivial, and it can help us design our API.
 1. [unittest](https://docs.python.org/3/library/unittest.html)
 1. [travis-ci](https://travis-ci.com/plans)
 1. [circleci](https://circleci.com/)
+
+
+
+
+
+# Multiple inheritance, method resolution order, and super()
+
+A class can inherit from an existing class.  In this instance we call the class
+that inherits the _subclass_ of the class it inherits from, the _superclass_.
+
+```python
+class A:
+    pass
+
+class B(A):
+    pass
+```
+
+But a class can inherit from several classes:
+
+```python
+class C(A, B):
+    pass
+```
+
+The inheritance order determines the _method resolution order_ of methods calls
+on objects.  See `C.__mro__`:
+
+>`(__main__.C, __main__.A, __main__.B, object)`)
+
+Multiple inheritance is too difficult (maybe not for you, but for your
+colleagues), so there's rarely a need to use it.
+
+
+## Exercises
+
+1. Make a class that inherits from two classes.  Test it with several MROs.
+1. Create shared variable names, and play with and without `super`
+
+
+
+
+## References
+
+* [Method resolution order](http://python-history.blogspot.com/2010/06/method-resolution-order.html) by Guido
+
+
+
+
+
+
+
+
 
 
 # Python 3.7, 3.8, 3.9 and beyond
