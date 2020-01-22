@@ -489,7 +489,54 @@ this.
 
 
 
-Explain `__eq__` and `return NotImplemented`
+**Comparing objects**
+
+One interesting thing about our `Square` implementation above, is that if we
+make to "identical" objects, `s = Square(10,10)` and `t = Square(10, 10)`, we
+can observe that `s != t`.  This is "counter-intuitive" on first sight,
+especially since every (both) members of `Square` have the same value.
+
+To be able to compare objects like this (equality), we implement the `__eq__`
+method:
+
+```python
+class Square:
+    # ...
+    def __eq__(self, other):
+        return self.width == other.width and self.height == other.height
+```
+
+This adds the following property to the class:
+* squares that are the same are equal
+* squares that are not the same are non-equal
+
+Which sounds like all you want.  But it has a bug:
+
+```python
+'s' == s
+```
+makes your application crash!
+
+When Python is asked to evaluate `a == b`, it first checks if `a.__eq__(b)`
+returns `True` or `False`.  However, `a.__eq__` can choose to return a special
+symbol `NotImplemented` which tells Python to instead check `b.__eq__(a)`.
+
+In the case above, `'s' == s`, the `str.__eq__` methods returns
+`NotImplemented`, so Python calls `s.__eq__('s')` which in turn checks `s.width
+== 's'.width`.  However, the `str` object has no property `width`, so an
+`AttributeError` is raised.
+
+Here is a better implementation:
+
+```python
+class Square:
+    # ...
+    def __eq__(self, other):
+        if type(self) != type(other):
+            return NotImplemented  # leave decision to `other`
+        return self.width == other.width and self.height == other.height
+```
+
 
 
 ## Exercises
