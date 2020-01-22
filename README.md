@@ -83,6 +83,21 @@ def fun():
 fun()
 ```
 
+**Creating functions with special behaviour**
+
+A more typical example for closures is the following
+
+```python
+def n_multiplier(n):
+    def mul(x):
+        return x * n
+    return mul
+
+quadruple = n_multiplier(4)
+print(quadruple(100))  # prints 400
+```
+
+
 
 
 ## Exercises
