@@ -16,7 +16,7 @@ file management.
 1. [Packaging and distribution of Python packages](#packaging-and-distribution-of-python-packages)
 1. [Callable objects, lambdas, and extended argument syntax](#callable-objects--lambdas--and-extended-argument-syntax)
 1. [Decorators](#decorators)
-1. [Properties, class methods, and static methods](#properties--class-methods--and-static-methods)
+1. [Object oriented programming members](#object-oriented-programming-members)
 1. [String representations of objects](#string-representations-of-objects)
 1. [Specialized numeric and scalar types](#specialized-numeric-and-scalar-types)
 1. [Functional-style programming tools](#functional-style-programming-tools)
