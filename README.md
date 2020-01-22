@@ -817,6 +817,8 @@ A dictionary can only hold immutable types.  Why?
 
 Introduce `namedtuple`.
 
+Add fluent programming style.
+
 ## Exercises
 
 1. Use `namedtuple` for a `Pos` type
@@ -825,7 +827,7 @@ Introduce `namedtuple`.
 ## References
 
 1. [reduce](https://docs.python.org/3/library/functools.html#functools.reduce)
-
+1. [fluent interface](https://www.martinfowler.com/bliki/FluentInterface.html)
 
 
 
