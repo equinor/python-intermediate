@@ -11,6 +11,7 @@ file management.
 
 1. [Warming up](#warming-up)
 1. [The iteration and iterable protocols](#the-iteration-and-iterable-protocols)
+1. [Error handling and exceptions](#error-handling-and-exceptions)
 1. [Closures](#closures)
 1. [Creating context managers](#creating-context-managers)
 1. [Packaging and distribution of Python packages](#packaging-and-distribution-of-python-packages)
@@ -22,7 +23,6 @@ file management.
 1. [Functional-style programming tools](#functional-style-programming-tools)
 1. [Multiple inheritance, method resolution order, and super()](#multiple-inheritance--method-resolution-order--and-super--)
 1. [Collection protocols and implementing collections](#collection-protocols-and-implementing-collections)
-1. [Advanced error handling with exceptions](#advanced-error-handling-with-exceptions)
 1. [SQL and `sqlite`](#sql-and--sqlite-)
 1. [Test driven development](#test-driven-development)
 1. [Python 3.7, 3.8, 3.9 and beyond](#python-37--38--39-and-beyond)
@@ -87,6 +87,149 @@ iteration by returning `StopIteration`.
 1. Iterate over dicts using raw iteration, over `dict.keys` and `dict.items`
 1. Iterate over `dict.items` and `zip` with tuple unpacking
 1. Create a class whose instances are iterable.
+
+
+## References
+
+1. [Iterator types](https://docs.python.org/3/library/stdtypes.html#typeiter)
+1. [`iter`](https://docs.python.org/3/library/functions.html#iter)
+1. [`next`](https://docs.python.org/3/library/functions.html#next)
+
+
+
+
+# Error handling and exceptions
+
+
+Any function or method can throw an exception if it likes.  An exception
+signals an _exceptional_ situation, a situation that the function does
+not know how to deal with.
+
+
+There is no way to completely avoid such situations: the users can give
+the program malformed input, the filesystem or a file on the computer
+can be corrupt, the network connection can go down.
+
+
+**A bit of warning**: Never _ever_ catch an exception you don't know how
+to deal with.  A program that crashes is nearly always better than a
+program that is wrong but doesn't inform you.  The best is of course to
+have a bugfree program, but that is often unattainable; the second best
+(since there will be bugs) is a program that crashes on errors,
+informing users and developers that something went wrong!
+
+The simplest way to trigger an exception in your terminal is to simply
+write `1/0`.  You are asking Python to divide a number by zero, which
+Python determines it cannot deal with gracefully, and throws a _division
+by zero_ error.
+
+Another easy way to trigger an exception is to run `[][0]`, asking for
+the first element of an empty list.  Again, Python doesn't know what to
+answer, so throws an `IndexError`.
+
+All exceptions in Python derive from `BaseException`.  For example,
+`ZeroDivisionError` in an `ArithmeticError` which in turn is an
+`Exception` (which is a `BaseException`).  The `IndexError` derives from
+`LookupError` which again is an `Exception`.  The _exception hierarchy_
+allows for very fine-grained error handling, you can for example catch
+any `LookupError` (`IndexError` or `KeyError` or maybe one you define
+yourself?), and avoid catching an `ArithmeticError` in case you don't
+know how to deal with such an error.
+
+```python
+def throwing():
+    raise ValueError('This message explains what went wrong')
+
+throwing()
+```
+
+The above will "crash" your Python instance.  We can "catch" the error,
+and either suppress it, or throw a different exception, or even re-throw
+the same exception:
+
+```python
+try:
+    throwing()
+except ValueError:
+    print('Caught an exception')
+    #raise  # <-- a single `raise` will re-throw the ValueError
+```
+
+To catch the specific error to get its message, we type
+`except ValueError as err`,
+where `err` is you variable name of choosing.
+
+```python
+try:
+    throwing()
+except ValueError as err:
+    print(err.message)
+```
+
+**Warning again**: The above is _very bad practice in general; never do
+that!!_
+
+`try...finally`: The `try` statement has three optional blocks,
+1. `except`,
+1. `else`, and
+1. `finally`.
+
+
+**Cleaning up:**  The `finally` block is a block that is always* run.
+
+```python
+try:
+    raise ValueError()
+finally:
+    print('Goodbye')
+```
+
+Since the `finally` block is always run, you should be very careful with
+_returning_ from the finally block.  Quiz: what is returned?
+```python
+def throwing():
+    try:
+        return True
+    finally:
+        return False
+```
+
+The only block we haven't considered up until this point is the `else`
+block.  The `else` is executed if and only if the `try` block does not
+throw an exception.
+
+```python
+def throwing(n):
+    value = float('inf')
+    try:
+        value = 1/n
+    except ZeroDivisionError:
+        print('Division by zero')
+    else:
+        print('Divided successfully')
+    finally:
+        print('Returning', value)
+    return value
+```
+
+Note that if you call `x = throwing('a')`, an exception will leak
+through, and the `else` block is skipped, and `x` will remain undefined.
+
+
+## Exercises
+
+1. Write a program that reads input from the user until the user types
+   an integer.  In case the user types a single `q`, the program should
+   quit.
+1. An `except` clause can have several handlers.  Write a program that
+   catches `IndexError` and `ValueError` and does different things
+   depending on which error was thrown.
+1. Define your own exception class and throw and catch it.
+
+## References
+
+* [Errors and exceptions](https://docs.python.org/3/tutorial/errors.html)
+* [Built-in exceptions](https://docs.python.org/3/library/exceptions.html)
 
 
 
@@ -748,138 +891,12 @@ iterables.  Some examples:
 * [Abstract Base Classes for Containers](https://docs.python.org/3/library/collections.abc.html)
 
 
-# Advanced error handling with exceptions
 
 
-Any function or method can throw an exception if it likes.  An exception
-signals an _exceptional_ situation, a situation that the function does
-not know how to deal with.
 
 
-There is no way to completely avoid such situations: the users can give
-the program malformed input, the filesystem or a file on the computer
-can be corrupt, the network connection can go down.
 
 
-**A bit of warning**: Never _ever_ catch an exception you don't know how
-to deal with.  A program that crashes is nearly always better than a
-program that is wrong but doesn't inform you.  The best is of course to
-have a bugfree program, but that is often unattainable; the second best
-(since there will be bugs) is a program that crashes on errors,
-informing users and developers that something went wrong!
-
-The simplest way to trigger an exception in your terminal is to simply
-write `1/0`.  You are asking Python to divide a number by zero, which
-Python determines it cannot deal with gracefully, and throws a _division
-by zero_ error.
-
-Another easy way to trigger an exception is to run `[][0]`, asking for
-the first element of an empty list.  Again, Python doesn't know what to
-answer, so throws an `IndexError`.
-
-All exceptions in Python derive from `BaseException`.  For example,
-`ZeroDivisionError` in an `ArithmeticError` which in turn is an
-`Exception` (which is a `BaseException`).  The `IndexError` derives from
-`LookupError` which again is an `Exception`.  The _exception hierarchy_
-allows for very fine-grained error handling, you can for example catch
-any `LookupError` (`IndexError` or `KeyError` or maybe one you define
-yourself?), and avoid catching an `ArithmeticError` in case you don't
-know how to deal with such an error.
-
-```python
-def throwing():
-    raise ValueError('This message explains what went wrong')
-
-throwing()
-```
-
-The above will "crash" your Python instance.  We can "catch" the error,
-and either suppress it, or throw a different exception, or even re-throw
-the same exception:
-
-```python
-try:
-    throwing()
-except ValueError:
-    print('Caught an exception')
-    #raise  # <-- a single `raise` will re-throw the ValueError
-```
-
-To catch the specific error to get its message, we type
-`except ValueError as err`,
-where `err` is you variable name of choosing.
-
-```python
-try:
-    throwing()
-except ValueError as err:
-    print(err.message)
-```
-
-**Warning again**: The above is _very bad practice in general; never do
-that!!_
-
-`try...finally`: The `try` statement has three optional blocks,
-1. `except`,
-1. `else`, and
-1. `finally`.
-
-
-**Cleaning up:**  The `finally` block is a block that is always* run.
-
-```python
-try:
-    raise ValueError()
-finally:
-    print('Goodbye')
-```
-
-Since the `finally` block is always run, you should be very careful with
-_returning_ from the finally block.  Quiz: what is returned?
-```python
-def throwing():
-    try:
-        return True
-    finally:
-        return False
-```
-
-The only block we haven't considered up until this point is the `else`
-block.  The `else` is executed if and only if the `try` block does not
-throw an exception.
-
-```python
-def throwing(n):
-    value = float('inf')
-    try:
-        value = 1/n
-    except ZeroDivisionError:
-        print('Division by zero')
-    else:
-        print('Divided successfully')
-    finally:
-        print('Returning', value)
-    return value
-```
-
-Note that if you call `x = throwing('a')`, an exception will leak
-through, and the `else` block is skipped, and `x` will remain undefined.
-
-
-## Exercises
-
-1. Write a program that reads input from the user until the user types
-   an integer.  In case the user types a single `q`, the program should
-   quit.
-1. An `except` clause can have several handlers.  Write a program that
-   catches `IndexError` and `ValueError` and does different things
-   depending on which error was thrown.
-1. Define your own exception class and throw and catch it.
-
-## References
-
-* [Errors and exceptions](https://docs.python.org/3/tutorial/errors.html)
-* [Built-in exceptions](https://docs.python.org/3/library/exceptions.html)
 
 
 
