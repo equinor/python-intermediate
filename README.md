@@ -941,10 +941,26 @@ project,
 is mandatory reading.
 
 
+**Data Access Object**
+
+When working with data, the data is almost always stored in a way which is not
+easy to work with as an end-user and higher-order programmer.  For example, to
+find a specific book, you need specified join and select queries, sometimes also
+pagination.  If you don't take care to design an API, before you start coding,
+you might find that your query strings (SQL) are scattered around your entire
+project, making it hard (and error prone) to change the design of your database.
+
+A _data access object_ (DAO) is an API that makes your data model concrete by
+abstracting away all the SQL specific tasks.  This also makes it possible to
+easily change from (e.g.) SQLite to Postgres, or even to a completely different
+backend like a different API or a file.  The DAO is a clear separation between the data backend and the more abstract functionality.
+
+
 ## Exercises
 
-1. import sqlite3
+1. import `sqlite3`
 1. create book database with one table, books, `author`, `year`, `title`, `publisher`, `genre`
+1. create a DAO for the book database
 1. normalize the database to 1NF, 2NF, 3NF, ...
 
 ## References
@@ -957,7 +973,7 @@ is mandatory reading.
    1. [PonyORM](https://ponyorm.org/)
    1. [SQLObject](http://sqlobject.org/)
    1. [O/R Mapping](http://www.agiledata.org/essays/mappingObjects.html)
-   1. [_The Vietnam of Computer Science_](http://blogs.tedneward.com/post/the-vietnam-of-computer-science/)
+1. [_The Vietnam of Computer Science_](http://blogs.tedneward.com/post/the-vietnam-of-computer-science/)
 
 
 
