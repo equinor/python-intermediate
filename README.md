@@ -144,7 +144,7 @@ the first element of an empty list.  Again, Python doesn't know what to
 answer, so throws an `IndexError`.
 
 All exceptions in Python derive from `BaseException`.  For example,
-`ZeroDivisionError` in an `ArithmeticError` which in turn is an
+`ZeroDivisionError` is an `ArithmeticError` which in turn is an
 `Exception` (which is a `BaseException`).  The `IndexError` derives from
 `LookupError` which again is an `Exception`.  The _exception hierarchy_
 allows for very fine-grained error handling, you can for example catch
