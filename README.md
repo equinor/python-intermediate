@@ -10,11 +10,11 @@ file management.
 
 
 1. [Warming up](#warming-up)
-1. [Function and class decorators](#function-and-class-decorators)
 1. [Closures](#closures)
 1. [Creating context managers](#creating-context-managers)
 1. [Packaging and distribution of Python packages](#packaging-and-distribution-of-python-packages)
 1. [Callable objects, lambdas, and extended argument syntax](#callable-objects--lambdas--and-extended-argument-syntax)
+1. [Decorators](#decorators)
 1. [Properties, class methods, and static methods](#properties--class-methods--and-static-methods)
 1. [String representations of objects](#string-representations-of-objects)
 1. [Specialized numeric and scalar types](#specialized-numeric-and-scalar-types)
@@ -46,73 +46,8 @@ Log into Advent of Code, 2019!
 * [Advent of Code 2019, Day 1](https://adventofcode.com/2019/day/1)
 
 
-# Function and class decorators
-
-A _decorator_ is a "metafunction"; a way to alter the behavior of a function
-that you write.  A decorator can change the behavior completely, change the
-inputs, and the return value of the function.
-
-Consider the very simple decorator `timeit` which prints the time a function
-uses to return:
-
-```python
-@timeit
-def fib(n):
-    return 1 if n <= 2 else fib(n-1) + fib(n-2)
-```
-
-Calling `fib(35)` should result in the following in the terminal:
-```
->>> fib(35)
-fib took 2.1 sec to complete on input 35
-9227465
-```
-
-First we observe that
-```python
-@timeit
-def fib(n):
-    pass
-```
-is syntactic sugar for
-
-```python
-def fib(n):
-    pass
-fib = timeit(fib)
-```
-
-The main idea is that we implement `timeit` something like this:
-```python
-def timeit(fib):
-    def new_fib(n):
-        start = now()
-        result = fib(n)
-        stop = now()
-        print(stop-start)
-        return result
-    return new_fib
-```
 
 
-## Exercises
-
-1. Create a decorator that hijacks a function, printing and returning
-1. Create a decorator that takes a string and hijacks a function, printing the string and returning the string
-1. Create a decorator that prints a string before the execution of the original function
-1. Create a decorator that takes a string and prints the string before and after the execution of the original function
-1. Create a decorator that takes a function as an argument, calls the function before and after the execution of the original function
-1. Create a decorator that takes a function `f` and returns `f(val)` where val is the output of the original function
-1. Create a class that acts like a decorator (see also callable objects)
-1. Use the `decorator` functool.
-1. Create a decorator `pushd` that changes `cwd` before and after function call.
-1. Use the `singledispatch` functionality from `functools` to _overload_ several functions
-1. Think about how you would _implement_ `singledispatch` yourself.
-1. Use `functools.wraps` to define a decorator.
-
-## References
-
-* [functools](https://docs.python.org/3/library/functools.html)
 
 # Closures
 
@@ -260,7 +195,81 @@ Show EBNF: https://docs.python.org/3.9/reference/compound_stmts.html#function-de
 1. Experiment with `filter`, `map`, `reduce` on `lambda`s.
 1. Create functions that take keyword-only arguments.
 1. Use `zip` with `*list`.  Explain what happens.
+
+
+
+# Decorators
+
+A _decorator_ is a "metafunction"; a way to alter the behavior of a function
+that you write.  A decorator can change the behavior completely, change the
+inputs, and the return value of the function.
+
+Consider the very simple decorator `timeit` which prints the time a function
+uses to return:
+
+```python
+@timeit
+def fib(n):
+    return 1 if n <= 2 else fib(n-1) + fib(n-2)
+```
+
+Calling `fib(35)` should result in the following in the terminal:
+```
+>>> fib(35)
+fib took 2.1 sec to complete on input 35
+9227465
+```
+
+First we observe that
+```python
+@timeit
+def fib(n):
+    pass
+```
+is syntactic sugar for
+
+```python
+def fib(n):
+    pass
+fib = timeit(fib)
+```
+
+The main idea is that we implement `timeit` something like this:
+```python
+def timeit(fib):
+    def new_fib(n):
+        start = now()
+        result = fib(n)
+        stop = now()
+        print(stop-start)
+        return result
+    return new_fib
+```
+
+
+## Exercises
+
+1. Use `lru_cache` to memoize `fib`
+1. Create a decorator that hijacks a function, printing and returning
+1. Create a decorator that takes a string and hijacks a function, printing the string and returning the string
+1. Create a decorator that prints a string before the execution of the original function
+1. Create a decorator that takes a string and prints the string before and after the execution of the original function
+1. Create a decorator that takes a function as an argument, calls the function before and after the execution of the original function
+1. Create a decorator that takes a function `f` and returns `f(val)` where val is the output of the original function
+1. Create a class that acts like a decorator (see also callable objects)
+1. Use the `decorator` functool.
+1. Create a decorator `pushd` that changes `cwd` before and after function call.
+1. Use the `singledispatch` functionality from `functools` to _overload_ several functions
+1. Think about how you would _implement_ `singledispatch` yourself.
+1. Use `functools.wraps` to define a decorator.
 1. Write a decorator that takes arbitrary arguments and keyword arguments.
+
+
+## References
+
+* [functools](https://docs.python.org/3/library/functools.html)
+
+
 
 
 # Properties, class methods, and static methods
