@@ -227,11 +227,34 @@ Show documentation for [setuptools](https://setuptools.readthedocs.io/en/latest/
 1. Install `black` and run on your module.  Why can it be good to use `black` in a project?
 
 
+
 # Callable objects, lambdas, and extended argument syntax
 
-Create a class `X`, instantiate an object `x` and try `x()`.
+```python
+class X:
+    pass
 
-Implement `__call__` on `X`.
+x = X()
+x()  # raises TypeError: 'X' object is not callable
+```
+
+Okay, so `x`, which is of type `X` is not callable.  What is callable?  Clearly
+functions, methods, and constructors?  Even `type`s are callable!
+
+Can we create a class of, e.g., _signals_ that you _could_ call?  Yes, indeed, by simply implementing `__call__`:
+
+```python
+class Signal:
+    def __init__(self, val):
+        self.val = val
+    def __call__(self):
+        return self.val
+
+
+s = Signal(4)
+
+s()  # returns 4  !
+```
 
 Show `lambda x: x**2`, e.g. `sorted([random.randint(-5, 5) for _ in range(10)], key=lambda x: x**2)`
 
