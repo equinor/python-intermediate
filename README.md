@@ -10,6 +10,7 @@ file management.
 
 
 1. [Warming up](#warming-up)
+1. [The iteration and iterable protocols](#the-iteration-and-iterable-protocols)
 1. [Closures](#closures)
 1. [Creating context managers](#creating-context-managers)
 1. [Packaging and distribution of Python packages](#packaging-and-distribution-of-python-packages)
@@ -19,7 +20,6 @@ file management.
 1. [String representations of objects](#string-representations-of-objects)
 1. [Specialized numeric and scalar types](#specialized-numeric-and-scalar-types)
 1. [Functional-style programming tools](#functional-style-programming-tools)
-1. [The iteration and iterable protocols](#the-iteration-and-iterable-protocols)
 1. [Multiple inheritance, method resolution order, and super()](#multiple-inheritance--method-resolution-order--and-super--)
 1. [Collection protocols and implementing collections](#collection-protocols-and-implementing-collections)
 1. [Advanced error handling with exceptions](#advanced-error-handling-with-exceptions)
@@ -44,6 +44,52 @@ Log into Advent of Code, 2019!
 ## References
 
 * [Advent of Code 2019, Day 1](https://adventofcode.com/2019/day/1)
+
+
+
+
+
+
+# The iteration and iterable protocols
+
+Iterating is one of the most fundamental things we do in programming.  It means
+to consider one item at a time of a sequence of items.  The question then
+becomes "what is a _sequence_ of items"?
+
+We are certainly familiar with some types of _sequences_, like `range(4)`, or
+the list `[0, 1, 2, 3]`, or the tuple `(0, 1, 2, 3)`, and you might know that
+strings are sequences of one-character strings.
+
+These are things that we can do the following with:
+
+```python
+for element in sequence:
+    print(element)
+```
+
+But there are more sequences, like sets of the type `set` (which don't have a
+pre-determined order), dictionaries (whose sequence becomes a sequence of the
+keys in the dictionary).
+
+Whenever we use `for`, `map`, `filter`, `reduce`, list comprehensions, etc.,
+Python _iterates_ through an _iterable_.  The _iterable_ is any object that
+implements an `__iter__` function (or the `__getitem__`, but we will skip that
+for now).
+
+The `__iter__` function returns an _iterator_.  An _iterator_ is any type
+implementing `__next__`.  That function returns elements in order, halting the
+iteration by returning `StopIteration`.
+
+
+## Exercises
+
+1. Iterate over lists, sets, strings, tuples
+1. Iterate over dicts using raw iteration, over `dict.keys` and `dict.items`
+1. Iterate over `dict.items` and `zip` with tuple unpacking
+1. Create a class whose instances are iterable.
+
+
+
 
 
 
@@ -614,44 +660,6 @@ Introduce `namedtuple`.
 
 1. [reduce](https://docs.python.org/3/library/functools.html#functools.reduce)
 
-
-# The iteration and iterable protocols
-
-Iterating is one of the most fundamental things we do in programming.  It means
-to consider one item at a time of a sequence of items.  The question then
-becomes "what is a _sequence_ of items"?
-
-We are certainly familiar with some types of _sequences_, like `range(4)`, or
-the list `[0, 1, 2, 3]`, or the tuple `(0, 1, 2, 3)`, and you might know that
-strings are sequences of one-character strings.
-
-These are things that we can do the following with:
-
-```python
-for element in sequence:
-    print(element)
-```
-
-But there are more sequences, like sets of the type `set` (which don't have a
-pre-determined order), dictionaries (whose sequence becomes a sequence of the
-keys in the dictionary).
-
-Whenever we use `for`, `map`, `filter`, `reduce`, list comprehensions, etc.,
-Python _iterates_ through an _iterable_.  The _iterable_ is any object that
-implements an `__iter__` function (or the `__getitem__`, but we will skip that
-for now).
-
-The `__iter__` function returns an _iterator_.  An _iterator_ is any type
-implementing `__next__`.  That function returns elements in order, halting the
-iteration by returning `StopIteration`.
-
-
-## Exercises
-
-1. Iterate over lists, sets, strings, tuples
-1. Iterate over dicts using raw iteration, over `dict.keys` and `dict.items`
-1. Iterate over `dict.items` and `zip` with tuple unpacking
-1. Create a class whose instances are iterable.
 
 
 
