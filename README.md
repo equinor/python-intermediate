@@ -414,7 +414,7 @@ finally:
     fh.close()  # closes the file even if exception is thrown
 ```
 
-(See the section on _exception handling_ if the `finally` keyword alludes you.)
+(See the section on _exception handling_ if the `finally` keyword eludes you.)
 
 
 The above scenario is handled with a _context manager_ which uses the `with`
