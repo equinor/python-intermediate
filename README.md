@@ -67,7 +67,7 @@ exercise should be quite feasible.
 1. [Closures](#closures)
 1. [Creating context managers](#creating-context-managers)
 1. [Packaging and distribution of Python packages](#packaging-and-distribution-of-python-packages)
-1. [Callable objects, lambdas, and extended argument syntax](#callable-objects--lambdas--and-extended-argument-syntax)
+1. [Calling, lambdas, and functions](#calling--lambdas--and-functions)
 1. [Decorators](#decorators)
 1. [Object oriented programming members](#object-oriented-programming-members)
 1. [String representations of objects](#string-representations-of-objects)
@@ -492,7 +492,7 @@ Show documentation for [setuptools](https://setuptools.readthedocs.io/en/latest/
 
 
 
-# Callable objects, lambdas, and extended argument syntax
+# Calling, lambdas, and functions
 
 ```python
 class X:
@@ -502,8 +502,8 @@ x = X()
 x()  # raises TypeError: 'X' object is not callable
 ```
 
-Okay, so `x`, which is of type `X` is not callable.  What is callable?  Clearly
-functions, methods, and constructors?  Even `type`s are callable!
+Okay, so `x`, which is of type `X` is not _callable_.  What is callable?
+Clearly functions, methods, and constructors?  Even `type`s are callable!
 
 Can we create a class of, e.g., _signals_ that you _could_ call?  Yes, indeed, by simply implementing `__call__`:
 
