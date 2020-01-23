@@ -73,7 +73,7 @@ exercise should be quite feasible.
 1. [String representations of objects](#string-representations-of-objects)
 1. [Specialized numeric and scalar types](#specialized-numeric-and-scalar-types)
 1. [Functional-style programming tools](#functional-style-programming-tools)
-1. [Collection protocols and implementing collections](#collection-protocols-and-implementing-collections)
+1. [Containers ABC](#containers-abc)
 1. [SQL and `sqlite`](#sql-and--sqlite-)
 1. [Test driven development](#test-driven-development)
 1. [Multiple inheritance, method resolution order, and super()](#multiple-inheritance--method-resolution-order--and-super--)
@@ -891,7 +891,7 @@ Add fluent programming style.
 
 
 
-# Collection protocols and implementing collections
+# Containers ABC
 
 We already know what an _iterable_ and an _iterator_ is.  In general,
 programming has much to do with collections of things, and our treatment of
