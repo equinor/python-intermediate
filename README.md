@@ -414,6 +414,9 @@ finally:
     fh.close()  # closes the file even if exception is thrown
 ```
 
+(See the section on _exception handling_ if the `finally` keyword alludes you.)
+
+
 The above scenario is handled with a _context manager_ which uses the `with`
 keyword:
 
@@ -422,16 +425,63 @@ with open('file.txt', 'r') as fh:
     value = int(fh.readlines()[0])
 ```
 
+Unsurprisingly, there are many more examples where we need to _remember to
+release or clean up stuff_.  A couple of examples are
+* open a database connection: remember to close it lest we risk losing commits
+* acquire a lock: remember to release it lest we get a dead/livelock
+* start a web session: forgetting to close might result in temporary lockout
+* temporarily modifying state (`pushd` example in exercises)
 
-What is actually `finally`?
 
-Open file, in the end of function scope close the file.
+**The context manager**
 
-Open database connection, in the end of function scope close the database connection.
+A _context manager_ is a class which has the methods
+* `__enter__(self)`
+* `__exit__(self, type, value, traceback)`
 
-Show a manual context manager.
+The `__enter__` method is called when the object is used in a context manager
+setting, and the return value of `__enter__` can be bound using the `as <name>`
+assignment.
 
-Show using `@contextlib.contextmanager`.  (show with 0,1,2 `yield` statements)
+Here is how to implement `open(·, 'r')` by ourselves:
+
+```python
+class Open:
+    def __init__(self, fname):
+        self._fname = fname
+        self._file = None
+
+    def __enter__(self):
+        self._file = open(self._fname, 'r')
+        print('\n\nFILE OPENED!\n\n')
+        return self._file
+
+    def __exit__(self, type, value, traceback):
+        self._file.close()
+        print('\n\nFILE CLOSED!\n\n')
+
+with Open('myopen.py') as f:
+    print(''.join(f.readlines()))
+```
+
+Now, we can force an exception by mis-spelling `readlines` and observe that the
+file is actually closed.
+
+```python
+with Open('myopen.py') as f:
+    print(''.join(f.readxxxlines()))
+```
+
+
+**Defining context manager with `contextlib` decorator**
+
+The `contextlib` library gives us a way to write context managers without
+needing to define a class, and without specifying `__enter__` and `__exit__`.
+
+Using the `@contextmanager` decorator, we can create a function that can `yield`
+once, and whatever is above the `yield` is interpreted as `__enter__` and
+whatever comes after `yield` is interpreted as `__exit__`.  By `yield`-ing a
+value, we allow binding in the `as [name]` expression.
 
 ```python
 import contextlib
@@ -1082,6 +1132,7 @@ Add fluent programming style.
 
 1. Use `namedtuple` for a `Pos` type
 1. Implement the `Pos` class immutable
+1. Create lists `a = b = [1,2,3]` and experiment with `a.append`.
 
 ## References
 
