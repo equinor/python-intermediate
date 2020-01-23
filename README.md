@@ -57,6 +57,15 @@ file management.
 We also assume a certain level of programming maturity; the _Warming up_
 exercise should be quite feasible.
 
+Most sections have a _reference_ section for further reading, e.g.
+
+> **References**
+> 1. [Programming FAQ](https://docs.python.org/3/faq/programming.html)
+
+It is recommended that you take some time to read through the material.
+
+
+
 
 ## Table of contents
 
@@ -734,7 +743,7 @@ Now, the only way to call `dist` is as `dist(p1, p2, scalar=val)`.
 
 1. [EBNF](https://docs.python.org/3/reference/compound_stmts.html#function-definitions)
 1. [varargs](https://docs.python.org/3/reference/expressions.html#calls)
-
+1. [positional-only](https://docs.python.org/3/faq/programming.html#faq-positional-only-arguments)
 
 # Decorators
 
