@@ -520,13 +520,177 @@ s = Signal(4)
 s()  # returns 4  !
 ```
 
-Show `lambda x: x**2`, e.g. `sorted([random.randint(-5, 5) for _ in range(10)], key=lambda x: x**2)`
 
-Explain wtf this is: `def f(a, /, b, *, c): pass` (keyword-only arguments, no-pos-only) [`f(1, b=2, c=3)`]
+### Lambdas
+
+Occasionally we want to create functions, but do not care to name them.  Suppose
+for some reason that you would like to pass the _Euclidean distance_ function
+into a function call.  Then you could be tempted to do something like this:
+
+```python
+def the_function_we_currently_are_in(values, ...):
+    def dist(a, b):
+        return math.sqrt((a.x - b.x)**2 + (a.y - b.y)**2)
+
+    return do_things(values, dist)
+```
+
+However, the _name_ of the function `dist` is not really necessary.  In
+addition, it is slightly annoying to write functions inside other functions.  A
+_lambda_ is an _anonymous function_, i.e. a function without a name, that we
+specify inline.  With a lamda, the function call would look like this:
+
+
+```python
+return do_things(
+    values, lambda a, b: math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2)
+)
+```
+
+A lambda expression is an inline function declaration with the form
+`lambda [arguments_list] : expression`
+and the lambda expression returns a function.
+
+```
+>>> type(lambda : None)
+function
+```
+
+We can assign bind the function to a name as usual:
+
+```
+>>> dist = lambda a, b: abs(a - b)
+>>> dist(5, 11)
+6
+```
+
+If we want to sort a list by a special key, e.g. _x²_, we can simply use the
+lambda `lambda x: x**2` as input to `sorted`, i.e.
+`sorted([random.randint(-5, 5) for _ in range(10)], key=lambda x: x**2)`
+
+### Argument syntax
+
+**Varargs, or `*args, **kwargs`.**
+
+You will occasionally need to create functions that are _variadic_, i.e., a
+function that takes _any number of arguments_, and in fact, any kind of keyword
+argument.  How can we make a function, say, `log`, which could accept both
+`log("hello")` and also `log("hello", a, b, c=x, d=y, e=z)` and so on?
+
+Enter _varargs_.  Consider this function:
+```python
+def summit(v1, v2=0, v3=0, v4=0, v5=0, v6=0, v7=0, v8=0):
+    return v1+v2+v3+v4+v5+v6+v7+v8
+```
+It _almost_ does the work, but not completely.  It only handles eight arguments, and it only handles a few keyword argument.
+
+In Python, we _actually_ implement the function like this:
+```python
+def summit(v1, *vals):
+    return v1 + sum(vals)
+```
+
+Now, we can call it like this:
+
+```
+>>> summit(2, 3, 4, 5, 6, 7, 8)
+35
+```
+
+Let's inspect:
+```pyton
+>>> def summit(v1, *vals):
+>>>     print(type(vals))
+>>>     return v1 + sum(vals)
+>>>
+>>>
+>>> summit(2, 3, 4, 5, 6, 7, 8)
+<class 'tuple'>
+35
+```
+
+As you can see, `vals` becomes a `tuple` of the values the user provides.
+
+However, it doesn't fix all our problems:
+```
+>>> summit(2, x=2)
+TypeError: summit() got an unexpected keyword argument 'x'
+```
+
+For this, we use the `**` operator:
+```python
+def summit(v1, *vals, **namedvals):
+    return v1 + sum(vals) + sum([val for _,val in namedvals.items()])
+```
+
 
 Explain `*args, **kwargs` as params.  Show `zip(*[[1,2,3], 'abc', [3,4,5]])`
 
-Show EBNF: https://docs.python.org/3.9/reference/compound_stmts.html#function-definitions
+
+**Keyword-only**
+
+In Python 3.6, the _asterisk_ keyword-only symbol `*` as a separator between the
+parameters and the keyword-only parameters.  A _keyword-only parameter_ is a
+parameter that has to be given to a function with the keyword:
+
+The following function call uses keyword-only arguments in the call:
+```python
+dist(a=Pos(0,1), b=Pos(1,0))
+```
+
+As opposed to this call which uses _positional_ arguments:
+
+```python
+dist(Pos(0,1), Pos(1,0))
+```
+
+To _force_ the user to call functions with keyword-only arguments, we use the
+asterisk:
+
+```python
+def dist(a, b, *, scalar):
+    return scalar * math.sqrt((a.x - b.x)**2 + (a.y - b.y)**2)
+```
+
+Now Python would not allow you to call this function with positional-only
+arguments; `scalar` _has_ to be declared using the keyword:
+
+```python
+>>> dist(Pos(1,0), Pos(0,1), 2.71828)
+#  TypeError: dist() takes 2 positional arguments but 3 were given
+```
+
+```python
+>>> dist(Pos(1,0), Pos(0,1), scalar=2.71828)
+3.844228442327537
+```
+
+**Positional-only**
+
+In Python 3.8, they extended the idea about _keyword-only_ parameters to also
+include _positional-only_ parameters.
+
+The idea is then that it could be made illegal to call
+`dist(a = Pos(1,0))`
+forcing the user to call the function without the keyword, in other words,
+`dist(Pos(1,0))`.
+
+Similar to the _asterisk_, the _slash_ is being used as a delimiter between the _positional-only_, and the _no-positional-only_.
+
+```python
+def dist(a, b, /):
+    ...
+```
+
+Combining the two ideas, yields this result:
+```python
+def dist(a, b, /, *, scalar):
+    return scalar * math.sqrt((a.x - b.x)**2 + (a.y - b.y)**2)
+```
+
+Now, the only way to call `dist` is as `dist(p1, p2, scalar=val)`.
+
+
 
 ## Exercises
 
@@ -536,6 +700,10 @@ Show EBNF: https://docs.python.org/3.9/reference/compound_stmts.html#function-de
 1. Create functions that take keyword-only arguments.
 1. Use `zip` with `*list`.  Explain what happens.
 
+## References
+
+1. [EBNF](https://docs.python.org/3/reference/compound_stmts.html#function-definitions)
+1. [varargs](https://docs.python.org/3/reference/expressions.html#calls)
 
 
 # Decorators
