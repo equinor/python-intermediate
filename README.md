@@ -623,8 +623,21 @@ def summit(v1, *vals, **namedvals):
     return v1 + sum(vals) + sum([val for _,val in namedvals.items()])
 ```
 
+Calling it:
+```
+>>> summit(2, 3, 4, x=2, y=1000)
+1011
+```
 
-Explain `*args, **kwargs` as params.  Show `zip(*[[1,2,3], 'abc', [3,4,5]])`
+
+You can also do the _"opposite"_, namely using the `*` and `**` operators on the
+_callsite_.  Recall our `dist(a, b)` from above.  If we have a list
+`pair = [Pos(1,0), Pos(0,1)]`,
+we can call `dist` simply like this: `dist(*pair)`.
+
+You will very often see `zip` being called with the `*` operator, we leave the
+decoding of this as an exercise to the reader.
+
 
 
 **Keyword-only**
@@ -698,7 +711,16 @@ Now, the only way to call `dist` is as `dist(p1, p2, scalar=val)`.
 1. Create a class whose instances are callable.
 1. Experiment with `filter`, `map`, `reduce` on `lambda`s.
 1. Create functions that take keyword-only arguments.
-1. Use `zip` with `*list`.  Explain what happens.
+1. Experiment with things like this: `zip(*[[1,2,3], 'abc', [3,4,5]])`
+1. Spell out in detail what happens here:
+   ```
+   >>> zip( *[(1,2), (3,4), (5,6)] )
+   [(1, 3, 5), (2, 4, 6)]
+   >>> zip( [(1,2), (3,4), (5,6)] )
+   [((1, 2),), ((3, 4),), ((5, 6),)]
+   ```
+
+
 
 ## References
 
