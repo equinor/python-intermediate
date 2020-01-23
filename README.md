@@ -67,7 +67,7 @@ exercise should be quite feasible.
 1. [Closures](#closures)
 1. [Creating context managers](#creating-context-managers)
 1. [Packaging and distribution of Python packages](#packaging-and-distribution-of-python-packages)
-1. [Calling, lambdas, and functions](#calling--lambdas--and-functions)
+1. [Calling, lambdas, and functions](#calling-lambdas-and-functions)
 1. [Decorators](#decorators)
 1. [Object oriented programming members](#object-oriented-programming-members)
 1. [String representations of objects](#string-representations-of-objects)
