@@ -566,7 +566,15 @@ We can assign bind the function to a name as usual:
 
 If we want to sort a list by a special key, e.g. _x²_, we can simply use the
 lambda `lambda x: x**2` as input to `sorted`, i.e.
-`sorted([random.randint(-5, 5) for _ in range(10)], key=lambda x: x**2)`
+
+```python
+>>> import random
+>>>
+>>> sorted([random.randint(-5, 5) for _ in range(10)], key=lambda x: x**2)
+[-1, 1, 3, 3, 4, -5, -5, 5, -5, 5]
+```
+
+_(Note that `sorted` is a *stable* sort in Python ...)_
 
 ### Argument syntax
 
