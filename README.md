@@ -1,5 +1,8 @@
 # Python intermediate 2 days course
 
+Welcome to the Python Intermediate 2 days course for Equinor ASA.  This entire course is available under the Creative Commons Attribution Share Alike 4.0 International license (cc-by-4.0).
+
+
 We assume familiarity with all basic types of Python, including `set`, `dict`,
 `tuple`, some functional programming tools in Python such as `map`, `filter`,
 `zip`, object oriented programming, organization of Python modules as well as
@@ -1113,3 +1116,6 @@ Lots of security improvements, documentation enhancements, optimizations, some d
 * `dict1 | dict2` or `dict1 + dict2` (under discussion)
 
 TBA
+
+
+Copyright 2020 Equinor ASA, (cc-by-4.0)
