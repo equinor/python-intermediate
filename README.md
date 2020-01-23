@@ -1,12 +1,38 @@
 # Python intermediate 2 days course
 
-Welcome to the Python Intermediate 2 days course for Equinor ASA.  This entire course is available under the Creative Commons Attribution Share Alike 4.0 International license (cc-by-4.0).
+Welcome to the Python Intermediate 2 days course for Equinor ASA.  This
+entire course is available under the _**Creative Commons** Attribution Share
+Alike 4.0 International license_ (cc-by-4.0).
+
+>**You are free to:**
+>
+>* **Share** — copy and redistribute the material in any medium or
+>  format
+>* **Adapt** — remix, transform, and build upon the material for any
+>  purpose, even commercially.
+>
+>This license is acceptable for Free Cultural Works.
+>
+>The licensor cannot revoke these freedoms as long as you follow the
+>license terms.
 
 
-We assume familiarity with all basic types of Python, including `set`, `dict`,
+## About this course
+
+This course is an intermediate level course in Python programming.  We
+will go through and learn _intermediate_ concepts, and get hands-on
+experience with these concepts.  Obviously, reading about topics and
+concepts in programming is _never a substitute for programming_!  You
+will not be an intermediate level programmer after this course, but you
+will have the tools available to become one.
+
+As this is not the basic course in Python,
+we _assume familiarity with all basic types_ of Python, including `set`, `dict`,
 `tuple`, some functional programming tools in Python such as `map`, `filter`,
 `zip`, object oriented programming, organization of Python modules as well as
 file management.
+We also assume a certain level of programming maturity; the _Warming up_
+exercise should be quite feasible.
 
 
 ## Table of contents
