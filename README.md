@@ -200,7 +200,6 @@ Any function or method can throw an exception if it likes.  An exception
 signals an _exceptional_ situation, a situation that the function does
 not know how to deal with.
 
-
 There is no way to completely avoid such situations: the users can give
 the program malformed input, the filesystem or a file on the computer
 can be corrupt, the network connection can go down.
@@ -212,6 +211,26 @@ program that is wrong but doesn't inform you.  The best is of course to
 have a bugfree program, but that is often unattainable; the second best
 (since there will be bugs) is a program that crashes on errors,
 informing users and developers that something went wrong!
+
+Eric Lippert categorises exceptions into four classes:
+
+fatal exceptions
+: Exceptions you cannot do anything about (e.g. out of memory error, corruption, etc), so do nothing about them
+
+boneheaded exceptions
+: Exceptions that you could avoid being raised, such as `IndexError`,
+  `NameError`, `ArgumentError`, etc.  Write your code properly so that they are
+  not triggered, and avoid catching them
+
+vexing exceptions
+: Exceptions that arise due often to poorly written library code that are raised
+  in non-exceptional cases.  Catch them, but it is vexing.
+
+exogenous exceptions
+: Exceptions that you need to deal with, such as `IOError`, network errors,
+  corrupt files, etc.  Try your operation and try to deal with any exception
+  that comes.
+
 
 The simplest way to trigger an exception in your terminal is to simply
 write `1/0`.  You are asking Python to divide a number by zero, which
@@ -325,7 +344,7 @@ through, and the `else` block is skipped, and `x` will remain undefined.
 
 * [Errors and exceptions](https://docs.python.org/3/tutorial/errors.html)
 * [Built-in exceptions](https://docs.python.org/3/library/exceptions.html)
-
+* [Vexing Exceptions](https://blogs.msdn.microsoft.com/ericlippert/2008/09/10/vexing-exceptions/)
 
 
 
