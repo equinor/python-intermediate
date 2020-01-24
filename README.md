@@ -214,22 +214,21 @@ informing users and developers that something went wrong!
 
 Eric Lippert categorises exceptions into four classes:
 
-fatal exceptions
-: Exceptions you cannot do anything about (e.g. out of memory error, corruption, etc), so do nothing about them
-
-boneheaded exceptions
-: Exceptions that you could avoid being raised, such as `IndexError`,
-  `NameError`, `ArgumentError`, etc.  Write your code properly so that they are
-  not triggered, and avoid catching them
-
-vexing exceptions
-: Exceptions that arise due often to poorly written library code that are raised
-  in non-exceptional cases.  Catch them, but it is vexing.
-
-exogenous exceptions
-: Exceptions that you need to deal with, such as `IOError`, network errors,
-  corrupt files, etc.  Try your operation and try to deal with any exception
-  that comes.
+<dl>
+<dt>fatal exceptions</dt>
+<dl>Exceptions you cannot do anything about (e.g. out of memory error, corruption, etc), so do nothing about them</dl>
+<dt>boneheaded exceptions</dt>
+<dl>Exceptions that you could avoid being raised, such as `IndexError`,
+`NameError`, `ArgumentError`, etc.  Write your code properly so that they are
+not triggered, and avoid catching them</dl>
+<dt>vexing exceptions</dt>
+<dl>Exceptions that arise due often to poorly written library code that are raised
+in non-exceptional cases.  Catch them, but it is vexing.</dl>
+<dt>exogenous exceptions</dt>
+<dl>Exceptions that you need to deal with, such as `IOError`, network errors,
+corrupt files, etc.  Try your operation and try to deal with any exception
+that comes.</dl>
+</dt>
 
 
 The simplest way to trigger an exception in your terminal is to simply
