@@ -239,7 +239,8 @@ if os.exists(filename):
     wc = count_lines_in_file(filename)
 ```
 
-It is for these situations that exceptions exist.
+It is for these situations that exceptions exist.  (Students asking
+about _monads_ are kindly asked to leave the premises.)
 
 
 **A bit of warning**: Never _ever_ catch an exception you don't know how
