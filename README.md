@@ -546,7 +546,50 @@ myfun()
 
 # Packaging and distribution of Python packages
 
-Introduce _virtual environments_.
+As a programmer, we constantly need to install packages; this is after all one
+of the greatest benefits of open source software.  We all benefit from the
+combined efforts of the software community!
+
+At the same time as we would like to install _all the packages_, when doing
+actual development, we need to have full control of our _environment_, which
+packages do we actually use, which versions of these packages, and which do we
+not need?
+
+Especially when we are working on several projects with different requirements,
+could this potentially become problematic.  Enter _virtual environments_.
+
+
+**Virtual environments**
+
+A virtual environment is a what it sounds; it is like a virtual machine that you
+can _activate_ (or _enable_), install a lot of packages, and then the packages
+are only installed _inside_ that environment.  When you are done, you can
+_deactivate_ the environment, and you do no longer see the packages.
+
+_(By the way, a virtual environment is only a folder!)_
+
+There are, in other words, three steps:
+1. _create_ a virtual environment
+1. _activate_ the virtual environment
+1. _deactivate_ the virtual environment
+
+```bash
+[trillian@iid ~]$ python3 -m venv my_evn
+[trillian@iid ~]$ source my_evn/bin/activate
+(my_evn) [trillian@iid ~]$ which python
+/home/trillian/my_evn/bin/python
+(my_evn) [trillian@iid ~]$ which pip
+/home/trillian/my_evn/bin/pip
+(my_evn) [trillian@iid ~]$ pip install numpy
+Collecting numpy
+ ...
+Installing collected packages: numpy
+Successfully installed numpy-1.18.1
+(my_evn) [trillian@iid ~]$ python -c "import numpy as np; print(np.__version__)"
+1.18.1
+```
+
+
 
 Show a small package `xl` and its `setup.py`.
 
@@ -560,6 +603,7 @@ Show documentation for [setuptools](https://setuptools.readthedocs.io/en/latest/
 
 ## Exercises
 
+1. Create two virtual environments where we install different versions of `numpy`
 1. Write a module
 1. Write a `setup.py` file
 1. Create a virtual environment, install package, delete virtual environment
@@ -567,6 +611,11 @@ Show documentation for [setuptools](https://setuptools.readthedocs.io/en/latest/
 1. Show GitHub and `pip install` from GitHub.
 1. Install `black` and run on your module.  Why can it be good to use `black` in a project?
 
+## References
+
+1. [`venv`](https://docs.python.org/3/library/venv.html)
+1. [`setuptools`](https://setuptools.readthedocs.io/en/latest/)
+1. [Black](https://black.readthedocs.io/en/stable/)
 
 
 # Calling, lambdas, and functions
