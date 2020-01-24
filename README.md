@@ -94,7 +94,25 @@ It is recommended that you take some time to read through the material.
 
 # Warming up
 
-Log into Advent of Code, 2019!
+Log into [Advent of Code, 2019](https://adventofcode.com/2019)!
+
+To start this course, we will warm up with a very basic exercise in programming.
+Start by logging in to your [GitHub](https://github.com) account, and then
+proceed to log in to Advent of Code by authenticating yourself using GitHub.
+
+You need to download a file, let's call it `'input'`, and your program should
+take the file path as input, i.e., you call your program like this:
+
+```bash
+$ python aoc01.py input
+<answer>
+```
+
+... and out comes your answer.  Remember a proper use of functions, and that you
+should use the
+`__name__ == '__main__'`
+idiom as in all other scripts we write.
+
 
 ## Exercises
 
