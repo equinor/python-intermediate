@@ -656,17 +656,45 @@ Successfully installed numpy-1.18.1
 1.18.1
 ```
 
+### Creating your own (proper) package
 
+A _module_ in Python is a folder with a file named `__init__.py`
 
-Show a small package `xl` and its `setup.py`.
+We will create a very short package `xl` containing _one_ module called `xl`.
+The file tree in our project looks like this:
+```
+[trillian@iid ~/proj]$ tree
+.
+├── requirements.txt
+├── setup.py
+├── tests
+│   ├── __init__.py
+│   └── test_units.py
+└── xl
+    └── __init__.py
 
-Add tests.
+2 directories, 5 files
+```
 
-Run `python setup.py build test install`
+You can for now ignore the tests, which we will come back to in the section about _Test Driven Development_.
 
-Show `python setup.py -e install`
+The `setup.py` file is the one that makes Python able to build this as a
+package, and it is very simple:
 
-Show documentation for [setuptools](https://setuptools.readthedocs.io/en/latest/).
+```python
+# setup.py
+import setuptools
+
+setuptools.setup(
+    name='xl',
+    packages=['xl'],
+    description='A small test package',
+    author='Trillian Astra (human)',
+)
+```
+
+Run `python setup.py install` to install it (remember to activate your virtual
+environment first).
 
 ## Exercises
 
@@ -674,8 +702,10 @@ Show documentation for [setuptools](https://setuptools.readthedocs.io/en/latest/
 1. Write a module
 1. Write a `setup.py` file
 1. Create a virtual environment, install package, delete virtual environment
-1. Add dependencies to module
-1. Show GitHub and `pip install` from GitHub.
+1. Add dependencies to module (`xlrd`, `pandas`)
+1. Implement `entry_points` to call a function in `xl`.
+1. Make `xl` read an excel file (input argument) and output its columns.
+1. `pip install` a package directly from GitHub.
 1. Install `black` and run on your module.  Why can it be good to use `black` in a project?
 
 ## References
