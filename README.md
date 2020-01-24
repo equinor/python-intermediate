@@ -113,6 +113,10 @@ should use the
 `__name__ == '__main__'`
 idiom as in all other scripts we write.
 
+(To get it out of the way, the _double underscores_ are pronounced _dunder_.  We
+often skip saying the trailing dunder, and we thus pronounce the above idiom as
+"_dunder name equals dunder main_".  We will see lots of dunders in this
+course.)
 
 ## Exercises
 
