@@ -204,6 +204,39 @@ There is no way to completely avoid such situations: the users can give
 the program malformed input, the filesystem or a file on the computer
 can be corrupt, the network connection can go down.
 
+Suppose that you want to create the function `int_divide` that always returns an
+integer:
+
+```python
+def int_divide(a: int, b:int) -> int:
+    if b == 0:
+        return 0  # ?? ... that's not correct‽
+    return a//b
+```
+
+Obviously, this is not a good idea, since `3/0 ≠ 0`.  Indeed, `3/0` is
+_undefined_, so the function should simply not return a value, but signal an
+error.  We could of course push the responsibility over to the callsite and say
+that if the user calls this function with illegal arguments, the output is
+undefined.  However, this is not always possible.  Consider this scenario:
+
+```python
+def count_lines_in_file(filename : str) -> int:
+    return len(open(filename, 'r').readlines())
+```
+
+But what is the file doesn't exist?  What should we then return?  We could again
+try to force the responsibility over to the user, but in this situation, that
+would not necessarily work due to possible _race conditions_.
+
+```python
+if os.exists(filename):
+    # between line 1 and 3, the file could be deleted, the filesystem unmounted
+    wc = count_lines_in_file(filename)
+```
+
+It is for these situations that exceptions exist.
+
 
 **A bit of warning**: Never _ever_ catch an exception you don't know how
 to deal with.  A program that crashes is nearly always better than a
@@ -216,20 +249,32 @@ Eric Lippert categorises exceptions into four classes:
 
 <dl>
 <dt>fatal exceptions</dt>
-<dl>Exceptions you cannot do anything about (e.g. out of memory error, corruption, etc), so do nothing about them</dl>
+<dd>Exceptions you cannot do anything about (e.g. out of memory error,
+corruption, etc), so do nothing about them</dd>
 <dt>boneheaded exceptions</dt>
-<dl>Exceptions that you could avoid being raised, such as `IndexError`,
-`NameError`, `ArgumentError`, etc.  Write your code properly so that they are
-not triggered, and avoid catching them</dl>
+<dd>Exceptions that you could avoid being raised, such as index errors, name
+errors, etc.  Write your code properly so that they are not triggered, and avoid
+catching them</dd>
 <dt>vexing exceptions</dt>
-<dl>Exceptions that arise due often to poorly written library code that are raised
-in non-exceptional cases.  Catch them, but it is vexing.</dl>
+<dd>Exceptions that arise due often to poorly written library code that are
+raised in non-exceptional cases.  Catch them, but it is vexing.</dd>
 <dt>exogenous exceptions</dt>
-<dl>Exceptions that you need to deal with, such as `IOError`, network errors,
-corrupt files, etc.  Try your operation and try to deal with any exception
-that comes.</dl>
-</dt>
+<dd>Exceptions that you need to deal with, such as I/O errors, network errors,
+corrupt files, etc.  Try your operation and try to deal with any exception that
+comes.</dd>
+</dl>
 
+
+It should be mentioned that in the past, it was considered normal program flow
+in Python to use exceptions.  The opinions on this matter is today under debate
+with many programmers arguing it to be an _anti-pattern_.  You will often come
+across the advise "never use exceptions for program flow".  An experienced
+developer can decide for themselves; In this course we recommend using
+exceptions for exceptional situations.
+
+
+
+**Exception handling in Python**
 
 The simplest way to trigger an exception in your terminal is to simply
 write `1/0`.  You are asking Python to divide a number by zero, which
