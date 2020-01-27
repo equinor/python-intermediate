@@ -81,7 +81,7 @@ It is recommended that you take some time to read through the material.
 1. [Object oriented programming members](#object-oriented-programming-members)
 1. [String representations of objects](#string-representations-of-objects)
 1. [Specialized numeric and scalar types](#specialized-numeric-and-scalar-types)
-1. [Functional-style programming tools](#functional-style-programming-tools)
+1. [Functional programming](#functional-programming)
 1. [Containers ABC](#containers-abc)
 1. [SQL and `sqlite`](#sql-and--sqlite-)
 1. [Test driven development](#test-driven-development)
@@ -1283,21 +1283,101 @@ There are also the `complex`, `decimal`, and `fraction`
 
 
 
-# Functional-style programming tools
+# Functional programming
 
-* Query-command separation
+In _functional programming_ we put a higher focus on input and output of
+functions, with little _storing_ of information.  We are familiar with
+many examples that are "purely functional", e.g. `dist(a, b) →
+abs(a-b)`, `max`, `+`, etc.  These functions take some argument, and
+return a new value without modifying the input argument.
 
-Why is query good?
+Here is a non-functional example:
+```python
+def __iadd__(a: Pos, b: Pos) -> None:
+    a.x += b.x
+    a.y += b.y
+```
 
-* Immutable types
+Here is the functional "equivalent":
+```python
+def __add__(a: Pos, b: Pos) -> Pos:
+    return Pos(a.x + b.x, a.y + b.y)
+```
 
-Why is immutability good?
+While both examples are easy to grasp and understand, the latter is much
+simpler to reason about; In the second example, the _state_ never
+changes.  This makes the second version much easier to test as well!
+
+An object which can be modified (like in the first example) is called a
+_mutable_ object.  The problem with mutable objects in Python is that
+you never really know who holds a reference to the object, which means
+that the object can be modified right under your own nose from far away.
+
+An object which cannot be modified is called _immutable_.  You will
+experience that immutable data is much easier to reason about and to
+deal with.  An immutable object can safely be passed around to other
+functions and threads without worrying that they might change its
+content.
+
+As a correctness-focused developer you should strongly prefer immutable
+data structures over mutable.  Your code will be safer with fewer bugs,
+easier to understand, and easier to test.
+
+Notice that even though a tuple is _immutable_, if its data is
+_mutable_, the tuple will only be reference-immutable: it will forever
+point to the same objects, but the object may be changed (under your
+nose).
+
+```
+>>> l = [1,2,3]
+>>> t = (0, l, 4)
+>>> print(t)
+(0, [1, 2, 3], 4)
+>>> l[0] = 5
+>>> print(t)
+(0, [5, 2, 3], 4)
+```
+
+In this example, the _list_ `l` is the "same" list, but, being mutable,
+its content changed.
+
+
+**Keys of a dictionary**
 
 A dictionary can only hold immutable types.  Why?
 
+
+**Tuples**
+
+
 Introduce `namedtuple`.
 
+
+
+**Command–query separation**
+
+Since we occasionally need to work with mutable data, it can be good to
+try to write your functions and methods so that they are of one of two
+types, either a command, or a query.  In QCS, a _command_ is a function
+which changes its input data, and does not return anything, whereas a
+_query_ is a function which returns a value, but does not moduify its
+input data.
+
+As with functional programming and immutable data, query functions are
+much simpler to reason about, and to test.  They are also "completely
+safe" to call; Since there are no side-effects, there can be no
+_unintended_ side-effects.
+
+There are examples where it's beneficial to write a function that both
+modifies its input and returns a value (such as `pop`), but it can very
+often be avoided.
+
+
+**Fluent style programming**
 Add fluent programming style.
+
+
+
 
 ## Exercises
 
