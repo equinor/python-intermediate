@@ -1374,8 +1374,39 @@ often be avoided.
 
 
 **Fluent style programming**
-Add fluent programming style.
 
+There is a programming style referred to as _fluent programming_ that
+allows for very smooth creation and "modification" of objects, at the
+same time improving readability.  In this style, you always _return_ an
+object (even if it is the same object you got as input) to enable
+_chaining_ of operations.  An API that allows for this chaining is
+called a _fluent interface_.
+
+Suppose that you have an SQL-like query object where you want to select,
+order, limit, and modify the data.  In a "traditional" style, you would
+do something like this (pseudocode):
+
+```python
+data = select('*')
+only_cats = data.where('type = cat')
+ascending_cats = only_cats.order_by('age')
+youngest_cats = ascending_cats.limit(10)
+result = youngest_cats.filter(str.upper)
+```
+
+Although the example is contrived, the following _fluent style_ example
+illustrates the idea behind a fluent interface.  Suppose that all
+function calls above returned a new query instance:
+
+```python
+result = select('*').where('type = cat')
+                    .order_by('age')
+                    .limit(10)
+                    .filter(str.upper)
+```
+
+It is not only easier to read and understand, but it neither overwrites
+any variables, nor does it introduce any "temporary" variables.
 
 
 
