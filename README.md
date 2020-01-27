@@ -1342,16 +1342,106 @@ In this example, the _list_ `l` is the "same" list, but, being mutable,
 its content changed.
 
 
-**Keys of a dictionary**
-
-A dictionary can only hold immutable types.  Why?
-
-
 **Tuples**
 
+You should by now be aware of the `tuple` type: the _"immutable list"_.
+A tuple behaves the same as a list, it is iterable, it has an order, you
+can slice, etc, just as you would with a list.  However, a tuple cannot
+be changed once it is created:
 
-Introduce `namedtuple`.
+```python
+>>> t = (1,2,3)
+>>> t[0] = 0
+TypeError: 'tuple' object does not support item assignment
+```
 
+You can neither change its content, nor its size.  A tuple is a great
+way to store _vectors_ and other short lists that you do not want
+changed.  However, once you start adding more data, it can become
+problematic.  Suppose that you decide to store Employees as tuples:
+
+```python
+employee = ('Alice', 1980, 'junior software developer')
+# must remember which index corresponds to which field
+position = employee[1]  # d'oh
+```
+
+As you can see, it becomes difficult to remember how to interpret the
+tuple.  Enter `namedtuple`.  The `namedtuple` is a very neat data
+structure which is essentially a tuple, but instead of using indices as
+keys to look up, we pick our own names:
+
+```python
+from collections import namedtuple
+Employee = namedtuple('Employee', ['name', 'date_of_birth', 'position'])
+alice = Employee('Alice', 1980, 'senior software developer')
+position = alice.position
+```
+
+You can even see that due to her use of `namedtuple`, Alice has been
+promoted.  Being immutable, we cannot change the content of the tuple:
+
+```python
+alice.position = 'fired'
+AttributeError: can't set attribute
+```
+
+
+
+**Keys of a dictionary**
+
+There is another reason for why immutability of a data structure is
+good; the _hash_ function.  Hashing an object is a way of assigning a
+unique* integer value to an object:
+
+```python
+>>> hash("hello")
+-8980137943331027800
+>>> hash("hellu")
+-3140687082901657771
+```
+
+This makes it possible to create a very simple way of making a set, or
+hash maps (aka dictionary).  This (homemade) set has _O(1)_ (constant
+time) lookup, insertion, and deletion.  We leave it as an exercise to
+the reader to fix bugs and complete the implementation with `__len__`
+and `__repr__`.  The latter function should make it clear why this set
+is "unordered".
+
+```python
+class Set:
+    _size = 127
+    def __init__(self):
+        self._data = [None for _ in range(Set._size)]
+
+    def add(self, elt):
+        self._data[hash(elt) % Set._size] = elt
+
+    def remove(self, elt):
+        self._data[hash(elt) % Set._size] = None
+
+    def __contains__(self, elt):
+        return self._data[hash(elt) % Set._size] is not None
+```
+
+This implementation of `set` works very well (except for the bugs), and
+see what happens if we try to add a tuple, a string and a list:
+
+```python
+s = Set()
+s.add('hello')
+print(s)
+s.add((1,2,3))
+print(s)
+s.add([4])
+```
+
+output:
+```python
+Set(['hello'])
+Set(['hello', (1, 2, 3)])
+TypeError: unhashable type: 'list'
+```
 
 
 **Command–query separation**
@@ -1413,14 +1503,19 @@ any variables, nor does it introduce any "temporary" variables.
 ## Exercises
 
 1. Use `namedtuple` for a `Pos` type
-1. Implement the `Pos` class immutable
-1. Create lists `a = b = [1,2,3]` and experiment with `a.append`.
+1. Implement the `Pos` class immutable.
+1. Implement the `Pos` class immutable using `dataclasses`, add `__add__` and `distance` (Euclidean).
+1. Create lists `a = b = [1,2,3]` and experiment with `a.append` and `b.append`.
+1. Complete the implementation of `Set` with `__len__` and `__repr__` and make it _iterable_.
+1. Fix the obvious bug in `Set`.  (Hint: `for i in range(128): s.add(i)`.  Is `1000 in s` true?)
+1. Make your own implementation of `Dictionary`.
+1. Implement a fluent interface for a light bulb with properties hue, saturation, and lightness.
 
 ## References
 
 1. [reduce](https://docs.python.org/3/library/functools.html#functools.reduce)
 1. [fluent interface](https://www.martinfowler.com/bliki/FluentInterface.html)
-
+1. [dataclasses](https://docs.python.org/3/library/dataclasses.html)
 
 
 
