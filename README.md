@@ -1411,6 +1411,7 @@ is "unordered".
 ```python
 class Set:
     _size = 127
+
     def __init__(self):
         self._data = [None for _ in range(Set._size)]
 
@@ -1477,9 +1478,9 @@ order, limit, and modify the data.  In a "traditional" style, you would
 do something like this (pseudocode):
 
 ```python
-data = select('*')
-only_cats = data.where('type = cat')
-ascending_cats = only_cats.order_by('age')
+data = select("*")
+only_cats = data.where("type = cat")
+ascending_cats = only_cats.order_by("age")
 youngest_cats = ascending_cats.limit(10)
 result = youngest_cats.filter(str.upper)
 ```
@@ -1489,10 +1490,13 @@ illustrates the idea behind a fluent interface.  Suppose that all
 function calls above returned a new query instance:
 
 ```python
-result = select('*').where('type = cat')
-                    .order_by('age')
-                    .limit(10)
-                    .filter(str.upper)
+result = (
+    select("*")
+    .where("type = cat")
+    .order_by("age")
+    .limit(10)
+    .filter(str.upper)
+)
 ```
 
 It is not only easier to read and understand, but it neither overwrites
