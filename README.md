@@ -1264,11 +1264,62 @@ class Square:
 
 
 
+## Design by contract
+
+If you _have to_ make your classes _mutable_, consider implementing the class
+using _design by contract_ (DbC) (also known as contract-driven development).
+
+In contract-driven development, we try to specify (in code) the preconditions
+and postconditions of a method call, as well as a _datainvariant_ for each type.
+Suppose that you have a class that keeps, e.g., fields `keys`, `values`, `size`,
+and `name`, and that `len(keys)` should always be at most `size`, and that
+`len(keys)` should always be the same as `len(values)`.  In addition, let's say
+that `name` should always be a non-empty string.  In this case, our class could
+have such a method:
+
+```python
+class RollingDict:
+    def _datainvariant(self):
+        assert len(self.keys) == len(self.values)
+        assert len(self.keys) <= self.size
+        assert isinstance(self.name, str) and self.name
+        return True
+```
+
+Now, we can, for each method call, call the `_datainvariant` before and after
+the method call:
+
+```python
+class RollingDict:
+    def insert(self, k, v):
+        assert self._datainvariant()
+        self.keys.append(k)
+        self.values.append(v)
+        assert self._datainvariant()
+```
+
+Some third-party libraries exist that allows the _datainvariant_ to be a
+decorator, and where you can also specify pre- and postconditions as decorators:
+
+```python
+@contract(a='int,>0', b='list[N],N>0', returns='list[N]')
+def my_function(a, b):
+    ...
+```
+
+
+
 ## Exercises
 
 1. Create a Position class with `dist`, `norm`, `__add__`, with `@property`
 1. Add `repr`, `str` and `hash`, `eq`
 1. Implement the same class with `@dataclass` decorator
+1. Implement `RollingDict` from Design by Contract above, removing the oldest
+   element if its size grows above allowed size.
+1. Implement the `_datainvariant` call as a _decorator_.
+
+
+
 
 
 # String representations and format strings
