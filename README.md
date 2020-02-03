@@ -79,7 +79,7 @@ It is recommended that you take some time to read through the material.
 1. [Calling, lambdas, and functions](#calling-lambdas-and-functions)
 1. [Decorators](#decorators)
 1. [Object oriented programming members](#object-oriented-programming-members)
-1. [String representations of objects](#string-representations-of-objects)
+1. [String representations and format strings](#string-representations-and-format-strings)
 1. [Specialized numeric and scalar types](#specialized-numeric-and-scalar-types)
 1. [Functional programming](#functional-programming)
 1. [Containers ABC](#containers-abc)
@@ -191,7 +191,8 @@ From the Python manual:
 1. Iterate over lists, sets, strings, tuples
 1. Iterate over dicts using raw iteration, over `dict.keys` and `dict.items`
 1. Iterate over `dict.items` and `zip` with tuple unpacking
-1. Create a class whose instances are iterable.
+1. Create a class whose instances are iterable using `__getitem__`.  Raise `IndexError` when you have no more items.
+1. Create a class whose instances are iterators, i.e., implements `__next__` and an `__iter__` that returns itself.  Remember to _raise_ `StopIteration`.
 
 
 ## References
@@ -1238,11 +1239,160 @@ class Square:
 1. Implement the same class with `@dataclass` decorator
 
 
-# String representations of objects
+# String representations and format strings
 
-Explain the difference between `repr` and `str`.
+When you try to `print` an object `obj`, Python calls `str(obj)`, which
+looks for _two_ functions, in order:
 
-Explain benefits of implementing a good `repr`.
+* `__str__`
+* `__repr__`
+
+The former function, `__str__` is meant to provide a _string representation_ of
+an object that is _usable for an end user_.  The `__str__` function may choose
+to discard parts of the state of `obj`, and try to make the string "nice to look
+at".
+
+However, the latter function, `__repr__` is meant as a _debugging string
+representation_, and is intended for developers to look at.  If possible, it is
+a good idea to make the object constructable using only the information provided
+by `__repr__`.  The `__repr__` function can explicitly be called by using the
+built-in associated function `repr`.
+
+Take a look at how Python implements `__str__` and `__repr__` for `datetime`:
+
+```python
+import datetime
+now = datetime.datetime.now()
+
+str(now)
+# '2020-02-03 09:03:43.147668'
+
+repr(now)
+# 'datetime.datetime(2020, 2, 3, 9, 3, 43, 147668)'
+```
+
+Observe that the latter returns a string that you could actually `eval`
+(warning: bad practice), and which would return an identical object (see also:
+`__eq__`).
+
+
+```python
+now == eval(repr(now))
+#  True
+```
+
+**Format strings**
+
+You have probably seen that it is possible to _concatenate_ two strings using `+`:
+
+```python
+'Hello, ' + 'world'
+#  'Hello, world'
+```
+
+You should also have seen that it is possible to use the _string modulo
+operator_ `%`:
+
+```python
+name = 'Arthur Dent'
+print('Hello, %s, how are you?' % name)
+# Hello, Arthur Dent, how are you?
+```
+
+The modulo operator introduces its own mini-language for dealing with
+_integers_, _floating point numbers_ (e.g. rounding), for padding and centering
+strings, etc.
+
+```python
+print('Integer: %2d, rounding float: %3.2f' % (1, 3.1415))
+#  Integer:  1, rounding float: 3.14
+print('Percent: %.2f%%, (E/e)xponential: %5.2E' % (2.718281828459045, 149597870700))
+#  Percent: 2.72%, (E/e)xponential: 1.50E+11
+```
+
+However, the _modulo_ operator gets confusing to work with when you have many
+arguments, and especially if some arguments are repeated.  That is why the
+_format strings_ where introduced:
+
+```python
+print('Here x is {x}, and x*y, {x}*{y} = {mulxy}'.format(x=2, y=3, mulxy=2*3))
+#  Here x is 2, and x*y, 2*3 = 6
+```
+
+As you can see, it supports _repeated_ arguments, and the arguments do not have
+to be in the same order:
+```python
+print('a = {a}, b = {b}'.format(b=4.12, a='A'))
+#  a = A, b = 4.12
+```
+It even nicely handles different types.
+
+Occasionally (predominantly while debugging), we can even throw our entire
+environment into the format string:
+
+```python
+print('x={x}, y={y}, a={a}'.format(**locals()))
+#  'x=12, y=13, a=A str'
+```
+
+However, this is not good practice.
+
+**`f`-strings**
+
+As of Python 3.6, we get something which is _even nicer_ than _format strings_,
+namely **`f`-strings**.  When prefixing a string with a single `f`, you ask
+Python to replace all _expressions_ in `{·}` with the evaluated expression:
+
+```python
+x = 3.14
+out = f'Here x is {x}, and x**2 is {x**2}'
+print(out)
+#  Here x is 3.14, and x**2 is 9.8596
+```
+
+This is very convenient to write, and even more convenient to read, as we now
+can read everything _inline_ and do not have to jump back and forth between
+braces and the format arguments.
+
+You can even see now how easy it is to make nice `__str__` and `__repr__`
+strings by just writing:
+
+```python
+    def __repr__(self):
+        return f'Class(a={self.a}, b={self.b})'
+```
+
+Note that by default, `f`-strings use `str`, but can be forcesd to use `repr` by
+specifying the conversion flag `!r` (recall `now` from above):
+
+```python
+f'{now}'
+#  '2020-02-03 09:05:54.206678'
+f'{now!r}'
+#  'datetime.datetime(2020, 2, 3, 9, 5, 54, 206678)'
+```
+
+And of course, you can use the same type specifiers with `f`-strings to limit
+the number of decimals using a single `:` in the expression:
+
+```python
+e = 2.718281828459045
+f'{e:.5f}'
+#  '2.71828'
+```
+
+Finally, [in Python 3.8, f-strings support = for self-documenting expressions
+and debugging]
+(https://docs.python.org/3/whatsnew/3.8.html#f-strings-support-for-self-documenting-expressions-and-debugging).
+Notice how the returned string prints the variable name as well.
+
+```python
+x = 3.14
+y = 2.71828
+a = 'A str'
+print(f'My vars are {x=}, {y=}, {a=}')
+#  My vars are x=3.14, y=2.71828, a='A str'
+```
 
 
 ## Exercises
@@ -1253,10 +1403,12 @@ Explain benefits of implementing a good `repr`.
 1. Create a class and define the `repr` and `str` methods.  What are the differences?
 1. Use `str(·)` on the object and observe.
 1. Use `repr(·)` on the object and observe.  Conclude.
+1. Center a short string using `f`-strings, pad left using `f`-strings.
 1. Return non-string in `str`.
 1. Print a class.  Which method is being called?
 1. Create a class with only one of the two methods, see what happens.
-
+1. Create a very simple `Complex` class and implement `__eq__`, `__str__`, and
+   `__repr__`.  Ensure that `eval(repr(c)) == c`.
 
 # Specialized numeric and scalar types
 
