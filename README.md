@@ -192,7 +192,7 @@ From the Python manual:
 
 1. Iterate over lists, sets, strings, tuples
 1. Iterate over dicts using raw iteration, over `dict.keys` and `dict.items`
-1. Iterate over `dict.items` and `zip` with tuple unpacking
+1. Iterate over `dict.items` with tuple unpacking.  What happens when you use `zip(*dict.items())`?
 1. Create a class whose instances are iterable using `__getitem__`.  Raise `IndexError` when you have no more items.
 1. Create a class whose instances are iterators, i.e., implements `__next__` and an `__iter__` that returns itself.  Remember to _raise_ `StopIteration`.
 
