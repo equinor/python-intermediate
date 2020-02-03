@@ -1691,6 +1691,51 @@ In this example, the _list_ `l` is the "same" list, but, being mutable,
 its content changed.
 
 
+**Functional-style programming**
+
+If your program has _no side-effects_, it is called a purely functional program.
+It is sometimes not easy to come up with the functional "equivalent" (if it
+exists), so let us look at one example.  Suppose you have a list `lst` and you
+are no longer interested in keeping the first element.  You want to define a
+function that removes the first element:
+
+```python
+def remove_first(lst):
+    lst.pop(0)
+    return lst
+```
+
+However, there is a different way of looking at the problem, namely that we
+implement a function `rest` that returns the list containing all but the first
+elements.
+
+```python
+def rest(lst):
+    return lst[1:]
+```
+
+Now you can simply write `lst = rest(lst)`, and you have the list without the
+first element.  The benefit is that since there are no side-effects, you do not
+care whether other places have references to `lst`, and in addition the latter
+function is simpler to test.
+
+Some of the benefits are:
+* _concurrency_ — the `rest` function above is thread-safe, whereas `remove_first`
+  is not
+* _testability_ — functional programs are easier to test since you only test that
+  the output is as expected given the correct input (they are always idempotent
+  wrt input)
+* _modularity_ —  functional style programming often forces you to make better
+  design decisions and splitting functions up into their atomic parts
+* _composability_ — When a function takes a type and returns the same (or
+  another) type, it is very easy to compose several functions, e.g. `sum(filter(map(·, ·), ·))`
+
+
+It is now time to revisit this exercise from _Calling, lambdas, and functions_:
+
+1. Experiment with `filter`, `map`, `reduce` on `lambda`s.
+
+
 **Tuples**
 
 You should by now be aware of the `tuple` type: the _"immutable list"_.
@@ -1859,6 +1904,9 @@ any variables, nor does it introduce any "temporary" variables.
 1. Implement the `Pos` class immutable.
 1. Implement the `Pos` class immutable using `dataclasses`, add `__add__` and `distance` (Euclidean).
 1. Create lists `a = b = [1,2,3]` and experiment with `a.append` and `b.append`.
+1. Implement the `sum` function as a recursive function.
+1. Implement the `product` function as a recursive function.
+1. Implement the `reduce` function as a recursive function.
 1. Complete the implementation of `Set` with `__len__` and `__repr__` and make it _iterable_.
 1. Fix the obvious bug in `Set`.  (Hint: `for i in range(128): s.add(i)`.  Is `1000 in s` true?)
 1. Make your own implementation of `Dictionary`.
@@ -1869,7 +1917,7 @@ any variables, nor does it introduce any "temporary" variables.
 1. [reduce](https://docs.python.org/3/library/functools.html#functools.reduce)
 1. [fluent interface](https://www.martinfowler.com/bliki/FluentInterface.html)
 1. [dataclasses](https://docs.python.org/3/library/dataclasses.html)
-
+1. [Functional programming HOWTO](https://docs.python.org/3/howto/functional.html)
 
 
 
