@@ -1064,6 +1064,7 @@ def timeit(fib):
 1. Think about how you would _implement_ `singledispatch` yourself.
 1. Use `functools.wraps` to define a decorator.
 1. Write a decorator that takes arbitrary arguments and keyword arguments.
+1. Implement `lru_cache`.
 
 
 ## References
@@ -1728,12 +1729,47 @@ Some of the benefits are:
 * _modularity_ —  functional style programming often forces you to make better
   design decisions and splitting functions up into their atomic parts
 * _composability_ — When a function takes a type and returns the same (or
-  another) type, it is very easy to compose several functions, e.g. `sum(filter(map(·, ·), ·))`
+  another) type, it is very easy to compose several functions,
+  e.g. `sum(filter(map(·, ·), ·))`
 
 
 It is now time to revisit this exercise from _Calling, lambdas, and functions_:
 
 1. Experiment with `filter`, `map`, `reduce` on `lambda`s.
+
+
+There are some modules in the standard library that are good to be aware of, and
+especially, we will mention
+
+* [bisect](https://docs.python.org/3/library/bisect.html)
+* [itertools](https://docs.python.org/3/library/itertools.html)
+* [functools](https://docs.python.org/3/library/functools.html)
+
+
+_Bisect_
+
+The `bisect` is a module for keeping a list sorted, so this is not a very
+"functional" functionality, however, it also offers the function `bisect.index`,
+or _binary search_.
+
+_Itertools_
+
+The `itertools` module is a module containing a wide array of _iterator building
+blocks_ which is perfect for functional programming.  If you ever need advanced
+iteration functionality, chances are that they are already implemented in
+`itertools`, some examples are `dropwhile`, `groupby`, `takewhile`,
+`zip_longest`, `count`, `cycle`, `repeat`, and not to mention `product`,
+`permutations`, `combinations`, and `combinations_with_replacement`.
+
+
+_Functools_
+
+> The `functools` module is for higher-order functions: functions that act on or
+> return other functions. In general, any callable object can be treated as a
+> function for the purposes of this module.
+
+The most commonly used from `functools` is the `lru_cache`, which is an exercise
+in the _Decorators_ section.
 
 
 **Tuples**
