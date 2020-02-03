@@ -1421,6 +1421,9 @@ print(f'My vars are {x=}, {y=}, {a=}')
 1. Create a very simple `Complex` class and implement `__eq__`, `__str__`, and
    `__repr__`.  Ensure that `eval(repr(c)) == c`.
 
+
+
+
 # Specialized numeric and scalar types
 
 ```python
@@ -1428,10 +1431,49 @@ print(f'My vars are {x=}, {y=}, {a=}')
 0.19999999999999996
 ```
 
+We have seen many times the `bool`, `int`, `float`, and `None` types.
 
-We know the `bool`, `int`, `float` (and `None`?) types.
+However, there is one more type that you don't see too often:
 
-There are also the `complex`, `decimal`, and `fraction`
+```python
+1.4142 + 0.7071j
+#  (1.4142+0.7071j)
+```
+
+`complex(1,2)` creates the complex number _1 + 2i_ (denoted `(1+2j)`)
+
+```python
+type(1.4142 + 0.7071j)
+#  complex
+```
+
+and it supports all the arithmetic operations you would expect, such as `+`,
+`-`, `*`, `/`, `**` (exponentiation), however, since the complex numbers do not
+have a total order, you can neither _compare_ them (using `<`), nor _round_ them
+(using any of `round`, `math.ceil`, `math.floor` triggers an error).  The latter
+also means that _whole division_ is not defined (`//`).
+
+```python
+a = 1.4142 + 0.7071j
+((1 + (3*a)) ** 2).conjugate()
+#  (22.984941069999994-22.242254759999994j)
+```
+
+A complex number cannot be cast to an `int`, (`TypeError: can't convert complex
+to int`), but you _can_ get the _real part_ and the _imaginary part_ out by
+calling their respective _properties_ (see _Object oriented programming members_
+and _Calling, lambdas, and functions_):
+
+```python
+print(a.real)
+#  1.4142
+print(a.imag)
+#  0.7071
+```
+
+
+In addition to the _basic types_, there are two more types that occasionally
+come in handy `decimal`, and `fraction`:
 
 > Squeezing infinitely many real numbers into a finite number of bits requires
 > an approximate representation.
@@ -1439,11 +1481,20 @@ There are also the `complex`, `decimal`, and `fraction`
 > — What Every Computer Scientist Should Know About Floating-Point Arithmetic.
 
 
-* `complex(1,2)` creates the number _1 + 2i_ (denoted `(1+2j)`)
-* `c.conjugate()` gives the complex conjugate
 * `decimal.Decimal(1.1)` → `Decimal('1.100000000000000088817841970012523233890533447265625')`
 * `fractions.Fraction(42,12)` → `Fraction(7, 2)`
 
+
+## Exercises
+
+1. Find the truthiness values for the basic types
+1. Create a function `complex_str` that prints a complex number (`a+bi`) using _i_ instead of _j_.
+1. Parse a complex number from the user
+
+
+## References
+
+1. [What Every Computer Scientist Should Know About Floating-Point Arithmetic](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html)
 
 
 # Functional programming
