@@ -1458,9 +1458,63 @@ print(f'My vars are {x=}, {y=}, {a=}')
 
 # Specialized numeric and scalar types
 
+The most basic types are `int`, `bool`, and `None`.  Integers have infinite
+precision, and `bool` are a subtype of `int` holding only the values `0` and
+`1`, albeit _named_ `False` and `True`, respectively.  Since `True` is just a
+different name for `1`, the fact that `2 + True*3 == 5` should not surprise you
+much.  However, such hogwash should rarely be used.
+
+The `None` _keyword_ is an object, and in fact the only object (a singleton, see
+`id(None)`), of type `NoneType`.  It is often used as a _sentinel_ value (see
+_Calling, lambdas, and functions_).  Note that `None` is not the same as `0`,
+`False`, `''` or anything else except `None`.  For every element `None == x` if
+and only if `x is None`.  Whenever we want to check if a variable is `None`, we
+use the `is` operator:
+
+```python
+if x is None:
+    print('x was None')
+```
+
+Note that instead of writing `not x is None`, we prefer the more readable:
+
+```python
+if x is not None:
+    print('x is not None')
+```
+
+_Floating point numbers_, however, are much more messy than the beautiful `int`,
+`bool`, and `None`.  The issue being, of course, that
+
+> Squeezing infinitely many real numbers into a finite number of bits requires
+> an approximate representation.
+>
+> — What Every Computer Scientist Should Know About Floating-Point Arithmetic.
+
+Unfortunately, the curse of infinity materializes as follows:
+
 ```python
 >>> 1.2 - 1.0
 0.19999999999999996
+```
+
+A Python `float` is typically backed by a C type `double`, and we can get some
+information about the `float` on our computer and on our environment by
+inspecting `sys.float_info`:
+
+```python
+sys.float_info(
+    max=1.7976931348623157e+308,
+    max_exp=1024,
+    max_10_exp=308,
+    min=2.2250738585072014e-308,
+    min_exp=-1021,
+    min_10_exp=-307,
+    dig=15,
+    mant_dig=53,
+    epsilon=2.220446049250313e-16,
+    radix=2,
+    rounds=1)
 ```
 
 We have seen many times the `bool`, `int`, `float`, and `None` types.
@@ -1505,13 +1559,7 @@ print(a.imag)
 
 
 In addition to the _basic types_, there are two more types that occasionally
-come in handy `decimal`, and `fraction`:
-
-> Squeezing infinitely many real numbers into a finite number of bits requires
-> an approximate representation.
->
-> — What Every Computer Scientist Should Know About Floating-Point Arithmetic.
-
+come in handy `decimal`, and `fraction`.
 
 * `decimal.Decimal(1.1)` → `Decimal('1.100000000000000088817841970012523233890533447265625')`
 * `fractions.Fraction(42,12)` → `Fraction(7, 2)`
@@ -1522,10 +1570,14 @@ come in handy `decimal`, and `fraction`:
 1. Find the truthiness values for the basic types
 1. Create a function `complex_str` that prints a complex number (`a+bi`) using _i_ instead of _j_.
 1. Parse a complex number from the user
+1. Without the REPL, what does `-10 // 3` yield?
+1. Without the REPL, what does `-10 % 3` yield?
+1. Without the REPL, what does `10 % -3` yield?
 
 
 ## References
 
+1. [Built-in Types](https://docs.python.org/3/library/stdtypes.html)
 1. [What Every Computer Scientist Should Know About Floating-Point Arithmetic](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html)
 
 
