@@ -164,6 +164,8 @@ The `__iter__` function returns an _iterator_.  An _iterator_ is any type
 implementing `__next__`.  That function returns elements in order, halting the
 iteration by returning `StopIteration`.
 
+_Quiz: Why not return `None`?  (See: *Sentinel values*)_
+
 
 From the Python manual:
 
