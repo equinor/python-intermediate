@@ -1266,6 +1266,33 @@ class Square:
 ```
 
 
+## Dataclasses
+
+In Python 3.7, a concept called `dataclasses` was introduced to the standard
+library.  A `dataclass` is what it sounds like, a way to create classes
+primarily for storing data.  Here is a simple implementation of `Position` as a
+`dataclass`:
+
+```python
+@dataclasses.dataclass(frozen=True, eq=True)
+class Position:
+    x : float
+    y : float
+    def __add__(self, other):
+        return Position(self.x + other.x, self.y + other.y)
+
+```
+
+(The rest of the functionality is left as an exercise for the reader.)
+
+```python
+p = Position(0.2, 0.3)
+print(p)
+#  Position(x=0.2, y=0.3)
+```
+
+As you can (or will) see, the `dataclass` comes with a Pandora's box of pleasant
+surprises.
 
 ## Design by contract
 
