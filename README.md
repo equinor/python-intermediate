@@ -238,7 +238,7 @@ def count_lines_in_file(filename : str) -> int:
     return len(open(filename, 'r').readlines())
 ```
 
-But what is the file doesn't exist?  What should we then return?  We could again
+But what if the file doesn't exist?  What should we then return?  We could again
 try to force the responsibility over to the user, but in this situation, that
 would not necessarily work due to possible _race conditions_.
 
