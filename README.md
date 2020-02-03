@@ -1290,8 +1290,19 @@ You have probably seen that it is possible to _concatenate_ two strings using `+
 #  'Hello, world'
 ```
 
-You should also have seen that it is possible to use the _string modulo
-operator_ `%`:
+There are obvious shortcomings, especially when dealing with non-strings (they
+have to be manually casted), and when interleaving variables into larger
+strings:
+
+```python
+x = 3.14
+y = 2.71828
+print('Here x (' + str(x) + ') is almost pi and y (' + str(y) + ') is ...')
+#  Here x (3.14) is almost pi and y (2.71828) is ...
+```
+
+As you can see, quite annoying to write, as well as read.  A minor improvement
+that have seen, is that it is possible to use the _string modulo operator_ `%`:
 
 ```python
 name = 'Arthur Dent'
