@@ -943,6 +943,35 @@ def dist(a, b, /, *, scalar):
 Now, the only way to call `dist` is as `dist(p1, p2, scalar=val)`.
 
 
+**Sentinel values**
+
+A _sentinel value_ is a parameter (or return value) that is uniquely identified,
+and that typically convey the meaning of _not specified_ or _non-existing_.
+Usually, the `None` value is the one we use:
+
+```python
+def compute(vals, cache=None):
+    if cache is None:
+        cache = {}
+    for v in vals:
+        if v in cache:
+            return cache[v]
+        return expensive_compute(v)
+```
+
+Here, not specifying `cache` is the same as using no cache, or `{}` as an input.
+`None` is used as a sentinel value.
+
+However, occasionally, `None` is not a good choice, as `None` could be a
+reasonable value.  In that case, we can use `object()` as a sentinel value:
+
+```python
+SENTINEL = object()
+def fun(val, default=SENTINEL):
+    pass
+```
+
+The implementation is left as an exercise for the reader
 
 ## Exercises
 
@@ -958,6 +987,9 @@ Now, the only way to call `dist` is as `dist(p1, p2, scalar=val)`.
    >>> zip( [(1,2), (3,4), (5,6)] )
    [((1, 2),), ((3, 4),), ((5, 6),)]
    ```
+1. Implement `min(iterable, default=None)` that tries to find a _minimal_
+   element in the iterable, and returns `default` if `default` is provided,
+   otherwise it raises `ValueError`.  What happens if `iterable = [None]`?
 
 
 
