@@ -903,7 +903,7 @@ Now, we can call it like this:
 ```
 
 Let's inspect:
-```pyton
+```python
 >>> def summit(v1, *vals):
 >>>     print(type(vals))
 >>>     return v1 + sum(vals)
