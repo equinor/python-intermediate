@@ -8,7 +8,7 @@ except ImportError:
 class _universe:
     def __contains__(self, _):
         return True
-UNIVERSE = _universe()
+UNIVERSE = _universe()  # A container that contains everything
 
 class DummyManager:
 
