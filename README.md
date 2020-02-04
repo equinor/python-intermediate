@@ -537,6 +537,11 @@ A _context manager_ is a class which has the methods
 The `__enter__` method is called when the object is used in a context manager
 setting, and the return value of `__enter__` can be bound using the `as <name>`
 assignment.
+Of course, then, the `__exit__` method is called whenever we exit the `with`
+block.  As you see, the `__exit__` method takes a bunch of arguments, all
+related to whether there was an exception thrown from within the `with` block.
+If you return `True` from the `__exit__` method, you suppress any exception
+thrown from the `with` block.
 
 Here is how to implement `open(·, 'r')` by ourselves:
 
@@ -612,6 +617,8 @@ myfun()
 1. Raise an exception and observe the post-print is present
 1. Implement the `open` context manager as `my_open`.
 1. Implement the `pushd` decorator as a context manager.
+1. Create a context manager using `__enter__` and `__exit__`.  Experiment with
+   suppressing exceptions from leaking through.
 1. Is it possible to have the name `pushd` as both a decorator and a context manager?
 1. Implement `tmpdir` as a context manager.
 
