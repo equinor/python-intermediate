@@ -1009,6 +1009,27 @@ def dist(a, b, /, *, scalar):
 Now, the only way to call `dist` is as `dist(p1, p2, scalar=val)`.
 
 
+**Intermezzo: a quiz**
+
+```python
+def run_simulation(realisations=[], ignore=[]):
+    ignore.append(1)  # Always ignore first realization
+    return sum(realisations) - sum(ignore)
+
+def main():
+    assert run_simulation([1,2,3]) == 5
+    print(run_simulation([1,2,3]))
+
+if __name__ == '__main__':
+    main()
+```
+
+Exercise:
+
+> What is printed from the above program?
+
+
+
 **Sentinel values**
 
 A _sentinel value_ is a parameter (or return value) that is uniquely identified,
