@@ -185,7 +185,64 @@ From the Python manual:
 > loop.
 
 
+**Slices**
 
+As you know by now, `x[·]` is equivalent to `x.__getitem__(·)`.  Some objects
+can take a _slice_ as an argument.  A _slice_ is an object of three elements:
+* `start` (optional)
+* `stop`
+* `step` (optional)
+
+We can create a slice object by running `slice(3, 100, 8)`.  Let us create a
+list of the first 1000 integers and then fetching every 8th element up to 100,
+starting from the 3rd element:
+
+```python
+lst = list(range(1000))  #  [0, 1, 2, ..., 999]
+spec = slice(3, 100, 8)
+print(lst[spec])
+#  [3, 11, 19, 27, 35, 43, 51, 59, 67, 75, 83, 91, 99]
+```
+
+Python offers _syntactic sugar_ for slicing used in _subscripts_:
+
+```python
+lst = list(range(1000))  #  [0, 1, 2, ..., 999]
+print(lst[3:100:8])
+#  [3, 11, 19, 27, 35, 43, 51, 59, 67, 75, 83, 91, 99]
+```
+
+This can come in handy if we, e.g. want to get every other element from a list.
+Then we can write `lst[::2]`.  More typically, suppose that we want to pair up
+elements like this:
+
+```python
+lst = [1, 2, 3, 4, 5, 6, 7, 8]
+#  we want:  [(1, 2), (3, 4), (5, 6), (7, 8)]
+zip(lst[0::2],lst[1::2])
+#  [(1, 2), (3, 4), (5, 6), (7, 8)]
+```
+
+If we want to accept slices in our own class, simply use them as provided in the
+`__getitem__` function.  The following should be enough to get you started.
+
+```python
+class X:
+    def __getitem__(self, index):
+        if isinstance(index, int):
+            return index
+        elif isinstance(index, slice):
+            start, stop, step = index.start, index.stop, index.step
+            return start, stop, step
+
+x = X()
+x[5]
+#  5
+x[::]
+#  (None, None, None)
+x[3:100:8]
+#  (3, 100, 8)
+```
 
 
 ## Exercises
