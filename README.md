@@ -392,7 +392,7 @@ where `err` is you variable name of choosing.
 try:
     throwing()
 except ValueError as err:
-    print(err.message)
+    print('Caught an error', str(err))
 ```
 
 **Warning again**: The above is _very bad practice in general; never do
