@@ -61,6 +61,7 @@ Most sections have a _reference_ section for further reading, e.g.
 
 > **References**
 > 1. [Programming FAQ](https://docs.python.org/3/faq/programming.html)
+> 1. [The Python tutorial](https://docs.python.org/3/tutorial/)
 
 It is recommended that you take some time to read through the material.
 
@@ -1591,8 +1592,7 @@ f'{e:.5f}'
 ```
 
 Finally, [in Python 3.8, f-strings support = for self-documenting expressions
-and debugging]
-(https://docs.python.org/3/whatsnew/3.8.html#f-strings-support-for-self-documenting-expressions-and-debugging).
+and debugging](https://docs.python.org/3/whatsnew/3.8.html#f-strings-support-for-self-documenting-expressions-and-debugging).
 Notice how the returned string prints the variable name as well.
 
 ```python
