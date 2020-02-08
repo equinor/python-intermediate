@@ -1,17 +1,21 @@
 #!/usr/bin/env python
 from __future__ import print_function
+
 try:
     from collections.abc import Container
 except ImportError:
     from collections import Container
 
+
 class _universe:
     def __contains__(self, _):
         return True
+
+
 UNIVERSE = _universe()  # A container that contains everything
 
-class DummyManager:
 
+class DummyManager:
     def __init__(self, suppress=None):
         if not suppress:
             self.suppress = []
@@ -20,16 +24,17 @@ class DummyManager:
         elif isinstance(suppress, Container):
             self.suppress = suppress
         else:
-            raise ValueError('suppress must be bool or container')
+            raise ValueError("suppress must be bool or container")
 
     def __enter__(self):
-        print('enter')
+        print("enter")
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        print('exit')
+        print("exit")
         if exc_type in self.suppress:
             return True
+
 
 def main():
     with DummyManager() as dm:
@@ -43,5 +48,6 @@ def main():
     with DummyManager([IndexError, KeyError]) as dm:
         raise ValueError()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

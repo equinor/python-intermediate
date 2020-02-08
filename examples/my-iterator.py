@@ -1,5 +1,4 @@
 class MyIterator:
-
     def __iter__(self):
         self.idx = 0
         return self
@@ -10,7 +9,8 @@ class MyIterator:
         self.idx += 1
         return (self.idx - 1) ** 2
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     m = MyIterator()
     for e in m:
         print(e)
