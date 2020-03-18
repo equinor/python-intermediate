@@ -443,7 +443,7 @@ def throwing(n):
 ```
 
 Note that if you call `x = throwing('a')`, an exception will leak
-through, and the `else` block is skipped, and `x` will remain undefined.
+through - it is presented with an exception we have not considered - and the `else` block is skipped, and `x` will remain undefined.
 
 
 ## Exercises
