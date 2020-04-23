@@ -143,7 +143,7 @@ becomes "what is a _sequence_ of items"?
 
 We are certainly familiar with some types of _sequences_, like `range(4)`, or
 the list `[0, 1, 2, 3]`, or the tuple `(0, 1, 2, 3)`, and you might know that
-strings are sequences of one-character strings.
+in Python strings are sequences of one-character strings.
 
 These are things that we can do the following with:
 
