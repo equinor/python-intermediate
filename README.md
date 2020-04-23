@@ -267,13 +267,17 @@ x[3:100:8]
 # Error handling and exceptions
 
 
-Any function or method can throw an exception if it likes.  An exception
+In Python, any function or method can throw an exception. An exception
 signals an _exceptional_ situation, a situation that the function does
-not know how to deal with.
+not know how to deal with.  It is worth mentioning already now that in
+Python, exceptions are sometimes also used to support flow control,
+for example the exception StopIteration is thrown when there are no
+futher items produced by an iterator. More about this later.
 
-There is no way to completely avoid such situations: the users can give
-the program malformed input, the filesystem or a file on the computer
-can be corrupt, the network connection can go down.
+
+There is no way to completely avoid exceptional situations: the users
+can give the program malformed input, the filesystem or a file on the
+computer can be corrupt, the network connection can go down.
 
 Suppose that you want to create the function `int_divide` that always returns an
 integer:
@@ -310,7 +314,7 @@ It is for these situations that exceptions exist.  (Students asking
 about _monads_ are kindly asked to leave the premises.)
 
 
-**A bit of warning**: Never _ever_ catch an exception you don't know how
+**A bit of warning**: Never catch an exception you don't know how
 to deal with.  A program that crashes is nearly always better than a
 program that is wrong but doesn't inform you.  The best is of course to
 have a bugfree program, but that is often unattainable; the second best
@@ -337,12 +341,12 @@ comes.</dd>
 </dl>
 
 
-It should be mentioned that in the past, it was considered normal program flow
-in Python to use exceptions.  The opinions on this matter is today under debate
-with many programmers arguing it to be an _anti-pattern_.  You will often come
-across the advise "never use exceptions for program flow".  An experienced
-developer can decide for themselves; In this course we recommend using
-exceptions for exceptional situations.
+In the past, it was considered normal program flow in Python to use
+exceptions.  The opinions on this matter is today under debate with
+many programmers arguing it to be an _anti-pattern_.  You will often
+come across the advise "never use exceptions for program flow".  An
+experienced developer can decide for themselves; In this course we
+recommend using exceptions for exceptional situations.
 
 
 
