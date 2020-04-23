@@ -1,4 +1,4 @@
-# Python intermediate 2 days course
+# Python Intermediate - a 2 day course
 
 Welcome to the Python Intermediate 2 days course for Equinor ASA.  This
 entire course is available under the _**Creative Commons** Attribution Share
