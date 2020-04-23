@@ -49,7 +49,7 @@ concepts in programming is _never a substitute for programming_!  You
 will not be an intermediate level programmer after this course, but you
 will have the tools available to become one.
 
-As this is not the basic course in Python,
+As this is not an introductory course to Python,
 we _assume familiarity with all basic types_ of Python, including `set`, `dict`,
 `tuple`, some functional programming tools in Python such as `map`, `filter`,
 `zip`, object oriented programming, organization of Python modules as well as
@@ -97,7 +97,7 @@ It is recommended that you take some time to read through the material.
 
 Log into [Advent of Code, 2019](https://adventofcode.com/2019)!
 
-To start this course, we will warm up with a very basic exercise in programming.
+As a start, we will warm up with a very basic exercise in programming.
 Start by logging in to your [GitHub](https://github.com) account, and then
 proceed to log in to Advent of Code by authenticating yourself using GitHub.
 
@@ -688,8 +688,8 @@ myfun()
 
 # Packaging and distribution of Python packages
 
-As a programmer, we constantly need to install packages; this is after all one
-of the greatest benefits of open source software.  We all benefit from the
+As a programmer, we constantly need to install packages; this is one
+of the great benefits of open source software.  We all benefit from the
 combined efforts of the software community!
 
 At the same time as we would like to install _all the packages_, when doing
