@@ -2346,11 +2346,16 @@ that your old systems still work.
 
 ## Python 3.9
 
-Lots of security improvements, documentation enhancements, optimizations, some deprecations...
-
-* `dict1 | dict2` or `dict1 + dict2` (under discussion)
-
-TBA
-
+* [PEP 584](https://www.python.org/dev/peps/pep-0584/) Union Operators in dict
+* [PEP 585](https://www.python.org/dev/peps/pep-0585/) Type Hinting Generics In Standard Collections
+* [PEP 593](https://www.python.org/dev/peps/pep-0593/) Flexible function and variable annotations
+* [PEP 602](https://www.python.org/dev/peps/pep-0602/) Python adopts a stable annual release cadence
+* [PEP 616](https://www.python.org/dev/peps/pep-0616/) String methods to remove prefixes and suffixes
+* [PEP 617](https://www.python.org/dev/peps/pep-0617/) New PEG parser for CPython
+* [BPO 38379](https://bugs.python.org/issue38379) garbage collection does not block on resurrected objects;
+* [BPO 38692](https://bugs.python.org/issue38692) `os.pidfd_open` added that allows process management without races and signals;
+* [BPO 39926](https://bugs.python.org/issue39926) Unicode support updated to version 13.0.0
+* [BPO 1635741](https://bugs.python.org/issue1635741) memory leak fixes
+* A number of Python builtins (`range`, `tuple`, `set`, `frozenset`, `list`) are now sped up using `vectorcall` [PEP 590](https://www.python.org/dev/peps/pep-0590)
 
 Copyright 2020 Equinor ASA, (cc-by-4.0)
