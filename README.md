@@ -1,4 +1,4 @@
-# Python intermediate 2 days course
+# Python Intermediate - a 2 day course
 
 Welcome to the Python Intermediate 2 days course for Equinor ASA.  This
 entire course is available under the _**Creative Commons** Attribution Share
@@ -49,7 +49,7 @@ concepts in programming is _never a substitute for programming_!  You
 will not be an intermediate level programmer after this course, but you
 will have the tools available to become one.
 
-As this is not the basic course in Python,
+As this is not an introductory course to Python,
 we _assume familiarity with all basic types_ of Python, including `set`, `dict`,
 `tuple`, some functional programming tools in Python such as `map`, `filter`,
 `zip`, object oriented programming, organization of Python modules as well as
@@ -97,7 +97,7 @@ It is recommended that you take some time to read through the material.
 
 Log into [Advent of Code, 2019](https://adventofcode.com/2019)!
 
-To start this course, we will warm up with a very basic exercise in programming.
+As a start, we will warm up with a very basic exercise in programming.
 Start by logging in to your [GitHub](https://github.com) account, and then
 proceed to log in to Advent of Code by authenticating yourself using GitHub.
 
@@ -143,7 +143,7 @@ becomes "what is a _sequence_ of items"?
 
 We are certainly familiar with some types of _sequences_, like `range(4)`, or
 the list `[0, 1, 2, 3]`, or the tuple `(0, 1, 2, 3)`, and you might know that
-strings are sequences of one-character strings.
+in Python strings are sequences of one-character strings.
 
 These are things that we can do the following with:
 
@@ -267,13 +267,17 @@ x[3:100:8]
 # Error handling and exceptions
 
 
-Any function or method can throw an exception if it likes.  An exception
+In Python, any function or method can throw an exception. An exception
 signals an _exceptional_ situation, a situation that the function does
-not know how to deal with.
+not know how to deal with.  It is worth mentioning already now that in
+Python, exceptions are sometimes also used to support flow control,
+for example the exception StopIteration is thrown when there are no
+futher items produced by an iterator. More about this later.
 
-There is no way to completely avoid such situations: the users can give
-the program malformed input, the filesystem or a file on the computer
-can be corrupt, the network connection can go down.
+
+There is no way to completely avoid exceptional situations: the users
+can give the program malformed input, the filesystem or a file on the
+computer can be corrupt, the network connection can go down.
 
 Suppose that you want to create the function `int_divide` that always returns an
 integer:
@@ -310,7 +314,7 @@ It is for these situations that exceptions exist.  (Students asking
 about _monads_ are kindly asked to leave the premises.)
 
 
-**A bit of warning**: Never _ever_ catch an exception you don't know how
+**A bit of warning**: Never catch an exception you don't know how
 to deal with.  A program that crashes is nearly always better than a
 program that is wrong but doesn't inform you.  The best is of course to
 have a bugfree program, but that is often unattainable; the second best
@@ -337,12 +341,12 @@ comes.</dd>
 </dl>
 
 
-It should be mentioned that in the past, it was considered normal program flow
-in Python to use exceptions.  The opinions on this matter is today under debate
-with many programmers arguing it to be an _anti-pattern_.  You will often come
-across the advise "never use exceptions for program flow".  An experienced
-developer can decide for themselves; In this course we recommend using
-exceptions for exceptional situations.
+In the past, it was considered normal program flow in Python to use
+exceptions.  The opinions on this matter is today under debate with
+many programmers arguing it to be an _anti-pattern_.  You will often
+come across the advise "never use exceptions for program flow".  An
+experienced developer can decide for themselves; In this course we
+recommend using exceptions for exceptional situations.
 
 
 
@@ -688,8 +692,8 @@ myfun()
 
 # Packaging and distribution of Python packages
 
-As a programmer, we constantly need to install packages; this is after all one
-of the greatest benefits of open source software.  We all benefit from the
+As a programmer, we constantly need to install packages; this is one
+of the great benefits of open source software.  We all benefit from the
 combined efforts of the software community!
 
 At the same time as we would like to install _all the packages_, when doing
