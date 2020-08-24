@@ -1526,7 +1526,7 @@ print('Percent: %.2f%%, (E/e)xponential: %5.2E' % (2.718281828459045, 1495978707
 
 However, the _modulo_ operator gets confusing to work with when you have many
 arguments, and especially if some arguments are repeated.  That is why the
-_format strings_ where introduced:
+_format strings_ were introduced:
 
 ```python
 print('Here x is {x}, and x*y, {x}*{y} = {mulxy}'.format(x=2, y=3, mulxy=2*3))
@@ -1576,7 +1576,7 @@ strings by just writing:
         return f'Class(a={self.a}, b={self.b})'
 ```
 
-Note that by default, `f`-strings use `str`, but can be forcesd to use `repr` by
+Note that by default, `f`-strings use `str`, but can be forced to use `repr` by
 specifying the conversion flag `!r` (recall `now` from above):
 
 ```python
